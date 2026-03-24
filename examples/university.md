@@ -4,6 +4,7 @@ title: slidev-theme-touying
 subtitle: University
 author: Author A and Author B
 logo: 🏫  # Can also be an image path
+routerMode: hash
 
 touying:
   preset: university

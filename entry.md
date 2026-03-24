@@ -10,8 +10,8 @@ This is a Slidev theme inspired by the style of [Touying](https://touying-typ.gi
 
 Currently we've implemented two [themes of Touying](https://touying-typ.github.io/themes):
 
-- <a :href="getUrl('university')" class="text-primary">University</a>
 - <a :href="getUrl('dewdrop')" class="text-primary">Dewdrop</a>
+- <a :href="getUrl('university')" class="text-primary">University</a>
 
 <script setup>
 function getUrl(preset) {

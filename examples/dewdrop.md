@@ -3,6 +3,7 @@ theme: ../
 title: slidev-theme-touying
 subtitle: Dewdrop
 author: Kerman
+routerMode: hash
 
 touying:
   preset: dewdrop
