@@ -32,8 +32,8 @@ jobs:
       - name: Build
         run: |
           nr build ./entry.md --base /${{github.event.repository.name}}/ -o ./dist/
-          nr build ./examples/dewdrop.md --base /${{github.event.repository.name}}/dewdrop/ -o ./dist/dewdrop/
-          nr build ./examples/university.md --base /${{github.event.repository.name}}/university/ -o ./dist/university/
+          nr build ./examples/dewdrop.md --base /${{github.event.repository.name}}/dewdrop/ -o ../dist/dewdrop/
+          nr build ./examples/university.md --base /${{github.event.repository.name}}/university/ -o ../dist/university/
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
