@@ -18,6 +18,8 @@
     "slidev": ">=0.52.0"
   },
   "scripts": {
+    "dev": "slidev",
+    "build": "slidev build",
     "entry": "slidev ./entry.md",
     "dewdrop": "slidev ./examples/dewdrop.md",
     "university": "slidev ./examples/university.md"
