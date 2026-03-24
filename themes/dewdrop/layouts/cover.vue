@@ -99,7 +99,7 @@ const { $slidev, $frontmatter } = useSlideContext()
     margin-top: 1em;
     font-size: 0.8em;
 
-    :deep(h1) {
+    h1 {
       display: none;
     }
   }
