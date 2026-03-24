@@ -32,7 +32,8 @@
         "serif": "Libertinus Serif, Linux Libertine, Noto Serif SC, Source Han Serif SC, Noto Serif CJK SC, Georgia, serif",
         "sans": "Fira Sans",
         "mono": "Fira Code",
-        "weights": "400,600"
+        "weights": "400,600",
+        "local": "Libertinus Serif, Linux Libertine, Source Han Serif SC, Noto Serif CJK SC, Georgia, serif"
       }
     }
   },
@@ -53,6 +54,7 @@
     "@types/node": "^25.5.0"
   },
   "dependencies": {
+    "@fontsource/libertinus-serif": "^5.2.1",
     "@vueuse/core": "^14.2.1"
   }
 }

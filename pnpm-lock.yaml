@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@fontsource/libertinus-serif':
+        specifier: ^5.2.1
+        version: 5.2.1
       '@vueuse/core':
         specifier: ^14.2.1
         version: 14.2.1(vue@3.5.30(typescript@5.9.3))
@@ -349,6 +352,9 @@ packages:
 
   '@floating-ui/utils@0.2.11':
     resolution: {integrity: sha512-RiB/yIh78pcIxl6lLMG0CgBXAZ2Y0eVHqMPYugu+9U0AeT6YBeiJpf7lbdJNIugFP5SIjwNRgo4DhR1Qxi26Gg==}
+
+  '@fontsource/libertinus-serif@5.2.1':
+    resolution: {integrity: sha512-NguzrKW1PJjePz8o+DMGFoMfoCEB57pE4szdqTxajcOwqG4Rzonv4iFu3/5luEg3ZAsvek8azonpw1PkYQDwoQ==}
 
   '@iconify-json/carbon@1.2.19':
     resolution: {integrity: sha512-l89XjtEeSA5fxlxPTNSU9AA+rxaz/Dn0X/ux0/3awR+tAayY8iJqWQu3AKxhchfx3LB/fX1Nv3ZppZzrBAt7aA==}
@@ -3139,6 +3145,8 @@ snapshots:
       '@floating-ui/core': 1.7.5
 
   '@floating-ui/utils@0.2.11': {}
+
+  '@fontsource/libertinus-serif@5.2.1': {}
 
   '@iconify-json/carbon@1.2.19':
     dependencies:
