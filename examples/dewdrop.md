@@ -4,8 +4,6 @@ layout: cover
 title: slidev-theme-touying
 subtitle: Dewdrop
 author: Kerman
-date: 2026
-institution: Inspired by typst-touying
 
 touying:
   preset: dewdrop
@@ -13,6 +11,12 @@ touying:
   footer: slidev-theme-touying · Dewdrop
   footerRight: ''
 ---
+
+# slidev-theme-touying
+
+2026
+
+Inspired by typst-touying
 
 ---
 layout: outline
@@ -197,12 +201,12 @@ Use a CSS grid for two-column layouts. Works well for code + explanation, or com
 **Right column**
 
 ```python
-def fibonacci(n: int) -> int:
+def fib(n: int) -> int:
     if n <= 1:
         return n
-    return fibonacci(n - 1) + fibonacci(n - 2)
+    return fib(n - 1) + fib(n - 2)
 
-print(fibonacci(10))  # 55
+print(fib(10))  # 55
 ```
 
 </div>

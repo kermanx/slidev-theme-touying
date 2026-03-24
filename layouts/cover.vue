@@ -1,110 +1,20 @@
 <script setup lang="ts">
-/**
- * cover layout — Title slide
- *
- * Matches Dewdrop's title-slide:
- * - Centered content, no margins
- * - Rounded neutralLight box containing title + subtitle in primary color
- * - Author, date, institution displayed below in smaller text
- * - No navigation, no footer
- */
-import { useTouyingConfig } from '../setup/context'
+import { computed } from 'vue'
+import { useTouyingConfig } from '../composables/useTouyingConfig'
+import DewdropCover from '../themes/dewdrop/layouts/cover.vue'
+import UniversityCover from '../themes/university/layouts/cover.vue'
 
-useTouyingConfig()
+defineOptions({ inheritAttrs: false })
+const config = useTouyingConfig()
+const component = computed(() =>
+  config.value.preset === 'university' ? UniversityCover : DewdropCover,
+)
 </script>
 
 <template>
-  <div class="slidev-layout cover">
-    <div class="cover-inner">
-      <!-- Title box -->
-      <div class="cover-title-box">
-        <div class="cover-title">
-          <slot name="title">
-            {{ $slidev.configs.title }}
-          </slot>
-        </div>
-        <div v-if="$frontmatter.subtitle" class="cover-subtitle">
-          <slot name="subtitle">{{ $frontmatter.subtitle }}</slot>
-        </div>
-      </div>
-
-      <!-- Meta info -->
-      <div class="cover-meta">
-        <div v-if="$frontmatter.author || $slidev.configs.author" class="cover-author">
-          <slot name="author">{{ $frontmatter.author ?? $slidev.configs.author }}</slot>
-        </div>
-        <div v-if="$frontmatter.date" class="cover-date">
-          <slot name="date">{{ $frontmatter.date }}</slot>
-        </div>
-        <div v-if="$frontmatter.institution" class="cover-institution">
-          <slot name="institution">{{ $frontmatter.institution }}</slot>
-        </div>
-      </div>
-
-      <!-- Extra content slot -->
-      <div v-if="$slots.default" class="cover-extra">
-        <slot />
-      </div>
-    </div>
-  </div>
+  <component :is="component" v-bind="$attrs">
+    <template v-for="(_, name) in $slots" #[name]="slotProps">
+      <slot :name="name" v-bind="slotProps ?? {}" />
+    </template>
+  </component>
 </template>
-
-<style scoped>
-.slidev-layout.cover {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  background: var(--slidev-theme-neutralLightest);
-}
-
-.cover-inner {
-  width: 100%;
-  max-width: 80%;
-  padding: 3em;
-  text-align: center;
-  box-sizing: border-box;
-}
-
-.cover-title-box {
-  background: var(--slidev-theme-neutralLight);
-  border-radius: 0.2em;
-  padding: 1em;
-  margin-bottom: 1.5em;
-}
-
-.cover-title {
-  font-size: 1.3em;
-  font-weight: 500;
-  color: var(--slidev-theme-primary);
-  line-height: 1.3;
-}
-
-.cover-subtitle {
-  font-size: 0.9em;
-  color: var(--slidev-theme-primary);
-  margin-top: 0.5em;
-}
-
-.cover-meta {
-  font-size: 0.8em;
-  color: var(--slidev-theme-neutralDarkest);
-  display: flex;
-  flex-direction: column;
-  gap: 0.5em;
-  align-items: center;
-}
-
-.cover-author,
-.cover-date,
-.cover-institution {
-  line-height: 1.4;
-}
-
-.cover-extra {
-  margin-top: 1em;
-  font-size: 0.8em;
-}
-</style>

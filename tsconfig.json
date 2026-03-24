@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "types": [
+      "@slidev/client/shim-vue.d.ts",
+      "@types/node",
+    ]
+  }
+}

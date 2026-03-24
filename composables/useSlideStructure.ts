@@ -10,6 +10,8 @@
 
 import { computed } from 'vue'
 import { useNav } from '@slidev/client'
+import type { SlideRoute } from '@slidev/types'
+import { createSharedComposable } from '@vueuse/core'
 
 export interface SlideSubsection {
   no: number
@@ -30,19 +32,19 @@ export interface SlideSection {
 /**
  * Builds the section structure from the full slides list.
  */
-export function buildSectionStructure(slides: any[]): SlideSection[] {
+export function buildSectionStructure(slides: SlideRoute[]): SlideSection[] {
   const sections: SlideSection[] = []
   let currentSection: SlideSection | null = null
 
   for (const slide of slides) {
-    const layout = slide.meta?.layout ?? slide.frontmatter?.layout ?? ''
+    const layout = slide.meta.layout
 
     if (layout === 'section') {
       currentSection = {
         no: slide.no,
         title:
-          slide.meta?.slide?.frontmatter?.title
-          ?? slide.meta?.slide?.title
+          slide.meta.slide?.frontmatter?.title
+          ?? slide.meta.slide?.title
           ?? `Section ${sections.length + 1}`,
         slides: [],
         subsections: [],
@@ -54,8 +56,9 @@ export function buildSectionStructure(slides: any[]): SlideSection[] {
     }
     else if (currentSection) {
       currentSection.slides.push(slide.no)
-      const title = slide.meta?.slide?.frontmatter?.title ?? slide.meta?.slide?.title
-      if (title) {
+      const title = slide.meta.slide?.frontmatter?.title ?? slide.meta.slide?.title
+      const level = slide.meta.slide?.level
+      if (title && level == 2) {
         currentSection.subsections.push({ no: slide.no, title })
       }
     }
@@ -68,7 +71,7 @@ export function buildSectionStructure(slides: any[]): SlideSection[] {
  * Returns the reactive section structure and a helper to find which section
  * the current slide belongs to.
  */
-export function useSlideStructure() {
+export const useSlideStructure = createSharedComposable(() => {
   const { slides, currentPage } = useNav()
 
   const sections = computed<SlideSection[]>(() =>
@@ -94,4 +97,4 @@ export function useSlideStructure() {
     currentSectionIndex,
     getSectionIndex,
   }
-}
+})

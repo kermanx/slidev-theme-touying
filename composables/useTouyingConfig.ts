@@ -38,6 +38,10 @@ export const useTouyingConfig = createSharedComposable(() => {
     document.documentElement.classList.toggle('tou-nav-sidebar', nav === 'sidebar')
     document.documentElement.classList.toggle('tou-nav-mini-slides', nav === 'mini-slides')
     document.documentElement.classList.toggle('tou-nav-none', nav === 'none')
+
+    const preset = config.value.preset
+    document.documentElement.classList.toggle('tou-preset-dewdrop', preset !== 'university')
+    document.documentElement.classList.toggle('tou-preset-university', preset === 'university')
   })
 
   return config

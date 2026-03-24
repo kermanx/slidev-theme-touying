@@ -7,7 +7,7 @@
  * - Right: page counter (or custom text) via touying.footerRight
  */
 import { useNav } from '@slidev/client'
-import { useTouyingConfig } from '../setup/context'
+import { useTouyingConfig } from '../../../composables/useTouyingConfig'
 
 const { currentPage, total } = useNav()
 const config = useTouyingConfig()

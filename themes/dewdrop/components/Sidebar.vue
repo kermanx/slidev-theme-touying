@@ -7,13 +7,13 @@
  * Clicking a section/slide navigates to it.
  */
 import { useNav } from '@slidev/client'
-import { useSlideStructure } from '../setup/useSlideStructure'
+import { useSlideStructure } from '../../../composables/useSlideStructure'
 
 const { slides, currentPage, go } = useNav()
 const { sections, currentSectionIndex } = useSlideStructure()
 
 function getSlideName(no: number): string {
-  const slide = slides.value?.find(s => s.no === no)
+  const slide = slides.value[no - 1] // slide numbers are 1-indexed
   // Try multiple paths: frontmatter title, parsed title, meta title
   return (
     slide?.meta?.slide?.frontmatter?.title

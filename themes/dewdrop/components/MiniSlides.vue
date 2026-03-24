@@ -8,7 +8,7 @@
  * Non-current sections are faded.
  */
 import { useNav } from '@slidev/client'
-import { useSlideStructure } from '../setup/useSlideStructure'
+import { useSlideStructure } from '../../../composables/useSlideStructure'
 
 const { currentPage, go } = useNav()
 const { sections, currentSectionIndex } = useSlideStructure()

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useNav } from '@slidev/client'
-import { useSlideStructure } from '../setup/useSlideStructure'
+import { useSlideStructure } from '../../../composables/useSlideStructure'
 
 const props = withDefaults(defineProps<{
   activeSectionNo?: number

@@ -1,35 +1,18 @@
 <script setup lang="ts">
-/**
- * outline layout — Full Table of Contents slide
- *
- * Similar to section.vue but shows all sections at full opacity
- * (no progressive fade effect). Useful for an initial or final TOC overview.
- *
- * Pass `highlight` prop to optionally highlight a specific section.
- */
-import { useTouyingConfig } from '../setup/context'
+import { computed } from 'vue'
+import { useTouyingConfig } from '../composables/useTouyingConfig'
+import DewdropOutline from '../themes/dewdrop/layouts/outline.vue'
 
-useTouyingConfig()
-
-withDefaults(defineProps<{
-  /** If set, this section slide number is highlighted. Otherwise all are shown equally. */
-  highlight?: number
-  /** How many heading levels to show: 1 = sections only, 2 = sections + subsections (default). */
-  depth?: number
-}>(), { depth: 2 })
+defineOptions({ inheritAttrs: false })
+const config = useTouyingConfig()
+// University has no dedicated outline layout; fall back to Dewdrop's.
+const component = computed(() => DewdropOutline)
 </script>
 
 <template>
-  <div class="slidev-layout outline" style="width:100%; height:100%; position:relative; overflow:hidden;">
-
-    <div style="width:100%; height:100%; padding-bottom:2.5em; box-sizing:border-box;">
-      <TouProgressiveOutline
-        :show-all="highlight == null"
-        :active-section-no="highlight"
-        :depth="depth"
-      />
-    </div>
-
-    <TouFooter />
-  </div>
+  <component :is="component" v-bind="$attrs">
+    <template v-for="(_, name) in $slots" #[name]="slotProps">
+      <slot :name="name" v-bind="slotProps ?? {}" />
+    </template>
+  </component>
 </template>

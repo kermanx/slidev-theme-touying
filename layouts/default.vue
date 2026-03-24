@@ -1,31 +1,20 @@
 <script setup lang="ts">
-/**
- * default layout — Standard content slide
- *
- * Features:
- * - Shows TouSidebar (sidebar mode) or TouMiniSlides (mini-slides mode) based on touying.navigation
- * - Content area padded to avoid overlap with nav
- * - Optional slide title preamble (from frontmatter.title) shown in primary color
- * - TouFooter at the bottom
- */
-import { useTouyingConfig } from '../setup/context'
+import { computed } from 'vue'
+import { useTouyingConfig } from '../composables/useTouyingConfig'
+import DewdropDefault from '../themes/dewdrop/layouts/default.vue'
+import UniversityDefault from '../themes/university/layouts/default.vue'
 
+defineOptions({ inheritAttrs: false })
 const config = useTouyingConfig()
+const component = computed(() =>
+  config.value.preset === 'university' ? UniversityDefault : DewdropDefault,
+)
 </script>
 
 <template>
-  <div class="slidev-layout default" style="width:100%; height:100%; position:relative; overflow:hidden;">
-
-    <!-- Navigation -->
-    <TouSidebar v-if="config.navigation === 'sidebar'" />
-    <TouMiniSlides v-else-if="config.navigation === 'mini-slides'" />
-
-    <!-- Content area -->
-    <div class="default-content">
-      <slot />
-    </div>
-
-    <!-- Footer -->
-    <TouFooter />
-  </div>
+  <component :is="component" v-bind="$attrs">
+    <template v-for="(_, name) in $slots" #[name]="slotProps">
+      <slot :name="name" v-bind="slotProps ?? {}" />
+    </template>
+  </component>
 </template>

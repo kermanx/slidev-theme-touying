@@ -18,7 +18,8 @@
     "slidev": ">=0.52.0"
   },
   "scripts": {
-    "dewdrop": "slidev ./examples/dewdrop.md"
+    "dewdrop": "slidev ./examples/dewdrop.md",
+    "university": "slidev ./examples/university.md"
   },
   "slidev": {
     "colorSchema": "light",
@@ -32,6 +33,8 @@
       },
       "themeConfig": {
         "primary": "#0c4842",
+        "secondary": "#176B87",
+        "tertiary": "#448C95",
         "neutralDarkest": "#000000",
         "neutralDark": "#202020",
         "neutralLight": "#f3f3f3",
@@ -57,5 +60,8 @@
   "devDependencies": {
     "@slidev/cli": "^52.14.1",
     "@types/node": "^25.5.0"
+  },
+  "dependencies": {
+    "@vueuse/core": "^14.2.1"
   }
 }
