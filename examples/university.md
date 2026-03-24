@@ -1,12 +1,9 @@
 ---
 theme: ../
-layout: cover
 title: slidev-theme-touying
 subtitle: University
-author: Kerman
-date: 2026
-institution: Inspired by typst-touying
-logo: 🎓
+author: Author A and Author B
+logo: 🏫  # Can also be an image path
 
 touying:
   preset: university
@@ -15,6 +12,12 @@ themeConfig:
   secondary: '#176B87'
   tertiary: '#448C95'
 ---
+
+# slidev-theme-touying
+
+Adapted from typst-touying
+
+2026
 
 ---
 layout: section

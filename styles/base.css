@@ -1,3 +1,9 @@
+:root {
+  --slidev-theme-neutralDarkest: #000000;
+  --slidev-theme-neutralDark: #202020;
+  --slidev-theme-neutralLight: #f3f3f3;
+  --slidev-theme-neutralLightest: #ffffff;
+}
 
 /* ============================================================
    Global slide typography

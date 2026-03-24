@@ -38,9 +38,56 @@ const logo = computed(() => {
     <div class="uni-header-row">
       <span class="uni-header-left">{{ slideTitle }}</span>
       <span class="uni-header-right">
-        <span v-if="sectionTitle">{{ sectionTitle }}</span>
+        <span v-if="sectionTitle" class="uni-header-section">{{ sectionTitle }}</span>
         <span v-if="logo" class="uni-header-logo">{{ logo }}</span>
       </span>
     </div>
   </header>
 </template>
+
+<style scoped>
+.uni-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+  background: var(--slidev-theme-neutralLightest);
+}
+
+.uni-header-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 0.35em 1.6em 0.3em;
+  gap: 1em;
+}
+
+.uni-header-left {
+  font-size: 2em;
+  font-weight: 600;
+  color: var(--slidev-theme-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.uni-header-right {
+  font-size: 1.2em;
+  color: var(--slidev-theme-secondary);
+  display: flex;
+  align-items: end;
+  gap: 0.4em;
+  flex-shrink: 0;
+}
+
+.uni-header-section {
+  opacity: 0.65;
+}
+
+.uni-header-logo {
+  font-size: 1.2em;
+}
+</style>

@@ -1,2 +1,3 @@
 import './base.css'
-import './layouts.css'
+import '../themes/dewdrop/styles.css'
+import '../themes/university/styles.css'

@@ -14,11 +14,35 @@ const config = useTouyingConfig()
 </script>
 
 <template>
-  <footer class="tou-footer">
-    <span class="tou-footer-left">{{ config.footer }}</span>
-    <span class="tou-footer-right">
+  <footer class="dew-footer">
+    <span class="dew-footer-left">{{ config.footer }}</span>
+    <span class="dew-footer-right">
       <template v-if="config.footerRight">{{ config.footerRight }}</template>
       <template v-else>{{ currentPage }} / {{ total }}</template>
     </span>
   </footer>
 </template>
+
+<style scoped>
+.dew-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5em 1em;
+  font-size: 0.8em;
+  color: var(--slidev-theme-neutralDark);
+  box-sizing: border-box;
+}
+
+.dew-footer-left {
+  opacity: 0.7;
+}
+
+.dew-footer-right {
+  opacity: 0.85;
+}
+</style>

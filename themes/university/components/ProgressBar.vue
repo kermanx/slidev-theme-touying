@@ -20,3 +20,22 @@ const pct = computed(() => {
     <div class="uni-progress-fill" :style="{ width: pct + '%' }" />
   </div>
 </template>
+
+<style scoped>
+.uni-progress-bar {
+  width: 100%;
+  height: 2px;
+  background: var(--slidev-theme-tertiary);
+  position: relative;
+  flex-shrink: 0;
+}
+
+.uni-progress-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background: var(--slidev-theme-primary);
+  transition: width 0.3s ease;
+}
+</style>

@@ -1,0 +1,8 @@
+:root.tou-preset-dewdrop {
+  --slidev-theme-primary: #0c4842;
+  --slidev-theme-secondary: #176B87;
+  --slidev-theme-tertiary: #448C95;
+  --slidev-theme-alpha: 0.4;
+  --slidev-theme-sidebarWidth: 10em;
+  --slidev-theme-miniSlidesHeight: 2em;
+}

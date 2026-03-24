@@ -32,3 +32,12 @@ withDefaults(defineProps<{
     <Footer />
   </div>
 </template>
+
+<style>
+.slidev-layout.outline {
+  background: var(--slidev-theme-neutralLightest);
+  display: flex;
+  align-items: stretch;
+  padding: 0;
+}
+</style>

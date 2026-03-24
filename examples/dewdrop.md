@@ -1,6 +1,5 @@
 ---
 theme: ../
-layout: cover
 title: slidev-theme-touying
 subtitle: Dewdrop
 author: Kerman
@@ -16,7 +15,7 @@ touying:
 
 2026
 
-Inspired by typst-touying
+Adapted from typst-touying
 
 ---
 layout: outline

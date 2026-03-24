@@ -30,3 +30,34 @@ const total = computed(() => slides.value?.length ?? 1)
     </div>
   </footer>
 </template>
+
+<style scoped>
+.uni-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: grid;
+  grid-template-columns: 25% 1fr 25%;
+  height: 1.8em;
+  font-size: 0.55em;
+  z-index: 10;
+}
+
+.uni-footer-a,
+.uni-footer-b,
+.uni-footer-c {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.8em;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.uni-footer-a { background: var(--slidev-theme-primary); }
+.uni-footer-b { background: var(--slidev-theme-secondary); }
+.uni-footer-c { background: var(--slidev-theme-tertiary); }
+</style>

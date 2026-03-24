@@ -43,7 +43,7 @@ const { $slidev, $frontmatter } = useSlideContext()
   </div>
 </template>
 
-<style scoped>
+<style>
 .slidev-layout.cover {
   display: flex;
   align-items: center;
@@ -52,56 +52,56 @@ const { $slidev, $frontmatter } = useSlideContext()
   height: 100%;
   padding: 0;
   background: var(--slidev-theme-neutralLightest);
-}
 
-.cover-inner {
-  width: 100%;
-  max-width: 100%;
-  padding: 0em 4em;
-  text-align: center;
-  box-sizing: border-box;
-}
+  .cover-inner {
+    width: 100%;
+    max-width: 100%;
+    padding: 0em 4em;
+    text-align: center;
+    box-sizing: border-box;
+  }
 
-.cover-title-box {
-  background: var(--slidev-theme-neutralLight);
-  border-radius: 0.2em;
-  padding: 16px;
-  margin-bottom: 1.5em;
-}
+  .cover-title-box {
+    background: var(--slidev-theme-neutralLight);
+    border-radius: 0.2em;
+    padding: 16px;
+    margin-bottom: 1.5em;
+  }
 
-.cover-title {
-  font-size: 1.6em;
-  font-weight: 500;
-  color: var(--slidev-theme-primary);
-  line-height: 1.3;
-}
+  .cover-title {
+    font-size: 1.6em;
+    font-weight: 500;
+    color: var(--slidev-theme-primary);
+    line-height: 1.3;
+  }
 
-.cover-subtitle {
-  font-size: 1em;
-  color: var(--slidev-theme-primary);
-  margin-top: 4px;
-}
+  .cover-subtitle {
+    font-size: 1em;
+    color: var(--slidev-theme-primary);
+    margin-top: 4px;
+  }
 
-.cover-meta {
-  font-size: 0.8em;
-  color: var(--slidev-theme-neutralDarkest);
-  display: flex;
-  flex-direction: column;
-  gap: 0.5em;
-  align-items: center;
-}
+  .cover-meta {
+    font-size: 0.8em;
+    color: var(--slidev-theme-neutralDarkest);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    align-items: center;
+  }
 
-.cover-author {
-  font-size: 1.2em;
-  line-height: 1.4;
-}
+  .cover-author {
+    font-size: 1.2em;
+    line-height: 1.4;
+  }
 
-.cover-extra {
-  margin-top: 1em;
-  font-size: 0.8em;
+  .cover-extra {
+    margin-top: 1em;
+    font-size: 0.8em;
 
-  :deep(h1) {
-    display: none;
+    :deep(h1) {
+      display: none;
+    }
   }
 }
 </style>

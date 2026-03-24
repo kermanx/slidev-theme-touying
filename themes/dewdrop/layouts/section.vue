@@ -36,3 +36,12 @@ const props = withDefaults(defineProps<{
     <Footer />
   </div>
 </template>
+
+<style>
+.slidev-layout.section {
+  background: var(--slidev-theme-neutralLightest);
+  display: flex;
+  align-items: stretch;
+  padding: 0;
+}
+</style>

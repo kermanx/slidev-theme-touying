@@ -32,3 +32,31 @@ const config = useTouyingConfig()
     <Footer />
   </div>
 </template>
+
+<style>
+.slidev-layout.default {
+  background: var(--slidev-theme-neutralLightest);
+
+  .default-content {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  :root.tou-nav-sidebar & .default-content {
+    padding: 1.2em var(--slidev-theme-sidebarWidth) 2em var(--slidev-theme-sidebarWidth);
+  }
+
+  :root.tou-nav-mini-slides & .default-content {
+    padding-top: calc(var(--slidev-theme-miniSlidesHeight) + 1em);
+    padding-bottom: 2.5em;
+    padding-left: 2.4em;
+    padding-right: 2.4em;
+  }
+
+  :root.tou-nav-none & .default-content {
+    padding: 2em 2.4em 2.5em 2.4em;
+  }
+}
+</style>

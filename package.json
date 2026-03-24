@@ -18,6 +18,7 @@
     "slidev": ">=0.52.0"
   },
   "scripts": {
+    "entry": "slidev ./entry.md",
     "dewdrop": "slidev ./examples/dewdrop.md",
     "university": "slidev ./examples/university.md"
   },
@@ -30,18 +31,6 @@
         "sans": "Fira Sans",
         "mono": "Fira Code",
         "weights": "400,600"
-      },
-      "themeConfig": {
-        "primary": "#0c4842",
-        "secondary": "#176B87",
-        "tertiary": "#448C95",
-        "neutralDarkest": "#000000",
-        "neutralDark": "#202020",
-        "neutralLight": "#f3f3f3",
-        "neutralLightest": "#ffffff",
-        "alpha": 0.4,
-        "sidebarWidth": "10em",
-        "miniSlidesHeight": "2em"
       }
     }
   },

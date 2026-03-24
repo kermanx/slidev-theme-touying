@@ -3,24 +3,35 @@
  * University section slide.
  *
  * Typst reference: new-section-slide in university.typ
- * - Centered, 20% horizontal padding
+ * - Centered vertically and horizontally, 20% horizontal padding
  * - Bold primary section title (1.5em)
- * - Progress bar below the title (primary → tertiary)
+ * - Progress bar below the title
  * - No outline (unlike Dewdrop)
  */
-import { useTouyingConfig } from '../../../composables/useTouyingConfig'
+import { computed } from 'vue'
+import { useNav } from '@slidev/client'
+import { useSlideStructure } from '../../../composables/useSlideStructure'
 import ProgressBar from '../components/ProgressBar.vue'
 import Footer from '../components/Footer.vue'
 
-useTouyingConfig()
+const { currentPage, slides } = useNav()
+const { sections } = useSlideStructure()
+
+const sectionTitle = computed(() => {
+  const slide = slides.value?.find(s => s.no === currentPage.value)
+  return (
+    slide?.meta?.slide?.frontmatter?.title
+    ?? slide?.meta?.slide?.title
+    ?? sections.value.find(s => s.no === currentPage.value)?.title
+    ?? ''
+  )
+})
 </script>
 
 <template>
   <div class="slidev-layout section uni-section">
     <div class="uni-section-inner">
-      <div class="uni-section-title">
-        <slot />
-      </div>
+      <div class="uni-section-title">{{ sectionTitle }}</div>
       <div class="uni-section-bar">
         <ProgressBar />
       </div>
@@ -28,3 +39,40 @@ useTouyingConfig()
     <Footer />
   </div>
 </template>
+
+<style>
+.slidev-layout.section.uni-section {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: var(--slidev-theme-neutralLightest);
+  overflow: hidden;
+  padding: 0;
+}
+
+.uni-section-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 1.8em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20%;
+  gap: 0.65em;
+}
+
+.uni-section-title {
+  font-size: 2em;
+  font-weight: 600;
+  color: var(--slidev-theme-primary);
+  line-height: 1.3;
+  width: 100%;
+}
+
+.uni-section-bar {
+  width: 100%;
+}
+</style>

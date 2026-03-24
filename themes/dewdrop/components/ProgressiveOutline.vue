@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import { useNav } from '@slidev/client'
 import { useSlideStructure } from '../../../composables/useSlideStructure'
+import { useTouyingConfig } from '../../../composables/useTouyingConfig'
 
 const props = withDefaults(defineProps<{
   activeSectionNo?: number
@@ -16,24 +17,36 @@ const props = withDefaults(defineProps<{
 
 const { go, currentPage } = useNav()
 const { sections, currentSectionIndex } = useSlideStructure()
+const touyingConfig = useTouyingConfig()
 
-// Mirror adaptive-columns: count total rows (sections + subsections at depth>=2)
-// Subsections are ~0.9em font so weight them slightly less
-const columnCount = computed(() => {
-  const totalRows = sections.value.reduce((acc, s) => {
-    return acc + 1 + (props.depth >= 2 ? s.subsections.length * 0.9 : 0)
-  }, 0)
-  return Math.min(Math.ceil(totalRows / 9), 3)
+// Pack sections into columns: fill each column up to outlineRowsPerCol rows before starting the next.
+// A section group occupies 1 row (the section) + its subsection rows (when depth >= 2).
+const columns = computed(() => {
+  type Entry = { section: (typeof sections.value)[number], idx: number }
+  const cols: Entry[][] = []
+  let currentCol: Entry[] = []
+  let currentRows = 0
+  const maxRows = touyingConfig.value.outlineRowsPerCol
+
+  sections.value.forEach((section, idx) => {
+    const rows = 1 + (props.depth >= 2 ? section.subsections.length : 0)
+    if (currentRows + rows > maxRows && currentCol.length > 0) {
+      cols.push(currentCol)
+      currentCol = []
+      currentRows = 0
+    }
+    currentCol.push({ section, idx })
+    currentRows += rows
+  })
+  if (currentCol.length > 0)
+    cols.push(currentCol)
+  return cols
 })
 
-const itemsPerCol = computed(() => Math.ceil(sections.value.length / columnCount.value))
-
-function numWidth(idx: number): string {
-  const n = sections.value.length
-  const maxInCol = columnCount.value === 1
-    ? n
-    : Math.min((Math.floor(idx / itemsPerCol.value) + 1) * itemsPerCol.value, n)
-  const digits = String(maxInCol).length
+function numWidth(colIdx: number): string {
+  const col = columns.value[colIdx]
+  const maxNo = col[col.length - 1].idx + 1
+  const digits = String(maxNo).length
   // digit em-width ≈ 0.55em each, plus "." and a small gap
   return `${digits * 0.55 + 0.45}em`
 }
@@ -59,43 +72,167 @@ function getItemState(idx: number): 'active' | 'past' | 'future' | 'neutral' {
 </script>
 
 <template>
-  <div class="tou-progressive-outline">
-    <div class="tou-outline-label">{{ label }}</div>
+  <div class="dew-progressive-outline">
+    <div class="dew-outline-label">{{ label }}</div>
 
-    <div class="tou-outline-list" :style="{ columnCount }">
+    <div class="dew-outline-list">
       <div
-        v-for="(section, idx) in sections"
-        :key="section.no"
-        class="tou-outline-section-group"
+        v-for="(col, colIdx) in columns"
+        :key="colIdx"
+        class="dew-outline-column"
       >
-        <!-- Section row -->
         <div
-          class="tou-outline-item"
-          :class="getItemState(idx)"
-          @click="go(section.no)"
+          v-for="({ section, idx }) in col"
+          :key="section.no"
+          class="dew-outline-section-group"
         >
-          <span class="tou-outline-num" :style="{ width: numWidth(idx) }">{{ idx + 1 }}.</span>
-          <span class="tou-outline-title" :data-text="section.title">{{ section.title }}</span>
-          <span class="tou-outline-fill" aria-hidden="true" />
-          <span class="tou-outline-page">{{ section.no }}</span>
-        </div>
-
-        <!-- Subsection rows (depth >= 2) -->
-        <template v-if="depth >= 2">
+          <!-- Section row -->
           <div
-            v-for="(sub, subIdx) in section.subsections"
-            :key="sub.no"
-            class="tou-outline-subitem"
-            :class="[getItemState(idx), sub.no === currentPage ? 'tou-outline-subitem-current' : '']"
-            @click="go(sub.no)"
+            class="dew-outline-item"
+            :class="getItemState(idx)"
+            @click="go(section.no)"
           >
-            <span class="tou-outline-num" :style="{ width: subNumWidth(idx, section.subsections.length) }">{{ idx + 1 }}.{{ subIdx + 1 }}.</span>
-            <span class="tou-outline-title" :data-text="sub.title">{{ sub.title }}</span>
-            <span class="tou-outline-fill" aria-hidden="true" />
-            <span class="tou-outline-page">{{ sub.no }}</span>
+            <span class="dew-outline-num" :style="{ width: numWidth(colIdx) }">{{ idx + 1 }}.</span>
+            <span class="dew-outline-title" :data-text="section.title">{{ section.title }}</span>
+            <span class="dew-outline-fill" aria-hidden="true" />
+            <span class="dew-outline-page">{{ section.no }}</span>
           </div>
-        </template>
+
+          <!-- Subsection rows (depth >= 2) -->
+          <template v-if="depth >= 2">
+            <div
+              v-for="(sub, subIdx) in section.subsections"
+              :key="sub.no"
+              class="dew-outline-subitem"
+              :class="[getItemState(idx), sub.no === currentPage ? 'dew-outline-subitem-current' : '']"
+              @click="go(sub.no)"
+            >
+              <span class="dew-outline-num" :style="{ width: subNumWidth(idx, section.subsections.length) }">{{ idx + 1 }}.{{ subIdx + 1 }}.</span>
+              <span class="dew-outline-title" :data-text="sub.title">{{ sub.title }}</span>
+              <span class="dew-outline-fill" aria-hidden="true" />
+              <span class="dew-outline-page">{{ sub.no }}</span>
+            </div>
+          </template>
+        </div>
       </div>
     </div>
   </div>
 </template>
+
+<style scoped>
+
+.dew-progressive-outline {
+  width: 100%;
+  height: 100%;
+  padding: 2em 3em;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.dew-outline-label {
+  font-size: 1.2em;
+  font-weight: 700;
+  color: var(--slidev-theme-primary);
+  margin-bottom: 0.5em;
+}
+
+.dew-outline-list {
+  display: flex;
+  gap: 2.5em;
+  align-items: flex-start;
+}
+
+.dew-outline-column {
+  flex: 1;
+  min-width: 0;
+}
+
+.dew-outline-item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35em;
+  cursor: pointer;
+  transition: opacity 0.3s ease, color 0.3s ease;
+  line-height: 1.4;
+  margin-bottom: 0.35em;
+}
+
+.dew-outline-subitem {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35em;
+  cursor: pointer;
+  transition: opacity 0.3s ease, color 0.3s ease;
+  line-height: 1.4;
+  margin-bottom: 0.2em;
+  padding-left: 0.8em;
+  font-size: 0.9em;
+}
+
+.dew-outline-subitem-current {
+  color: var(--slidev-theme-primary);
+  font-weight: 600;
+}
+
+.dew-outline-num {
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.dew-outline-title {
+  flex-shrink: 0;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+/* Pre-reserve bold width so layout doesn't shift on active */
+.dew-outline-title::after {
+  content: attr(data-text);
+  font-weight: 600;
+  display: block;
+  height: 0;
+  visibility: hidden;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Dot leaders — fade right edge to avoid half-dots */
+.dew-outline-fill {
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  margin: 0 0.04em;
+  -webkit-mask-image: linear-gradient(to right, black calc(100% - 0.6em), transparent 100%);
+  mask-image: linear-gradient(to right, black calc(100% - 0.6em), transparent 100%);
+}
+
+.dew-outline-fill::after {
+  content: ' . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .';
+}
+
+.dew-outline-page {
+  flex-shrink: 0;
+}
+
+/* Progressive mode: current section */
+.dew-outline-item.active {
+  color: var(--slidev-theme-primary);
+  font-weight: 600;
+}
+
+/* Progressive mode: past / future */
+.dew-outline-item.past,
+.dew-outline-item.future,
+.dew-outline-subitem.past,
+.dew-outline-subitem.future {
+  opacity: var(--slidev-theme-alpha);
+  color: var(--slidev-theme-neutralDarkest);
+}
+
+/* Outline (showAll) mode */
+.dew-outline-item.neutral {
+  color: var(--slidev-theme-neutralDarkest);
+}
+</style>
