@@ -1,0 +1,172 @@
+
+/* ============================================================
+   Global slide typography
+   ============================================================ */
+.slidev-layout {
+  --slidev-code-font-size: 0.8em;
+  --slidev-code-line-height: 1.6;
+  --slidev-code-padding: 0.2em 0.4em;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--slidev-theme-neutralDarkest);
+  background-color: var(--slidev-theme-neutralLightest);
+  --uno: font-serif;
+}
+
+.slidev-code {
+  margin: 0.6em 0;
+}
+
+.slidev-layout pre,
+.slidev-layout code {
+  user-select: text;
+}
+
+.slidev-layout code {
+  border-radius: 3px;
+  --uno: font-mono;
+}
+
+.slidev-layout h1,
+.slidev-layout h2,
+.slidev-layout h3,
+.slidev-layout h4,
+.slidev-layout h5,
+.slidev-layout h6 {
+  color: var(--slidev-theme-primary);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.slidev-layout h1 { font-size: 1.6em;  margin-top: 0.6em; margin-bottom: 0.3em; margin-left: -0.05em; }
+.slidev-layout h2 { font-size: 1.35em; margin-top: 0.7em; margin-bottom: 0.25em; }
+.slidev-layout h3 { font-size: 1.15em; margin-top: 0.5em; margin-bottom: 0.2em; }
+.slidev-layout h4 { font-size: 1.05em; margin-top: 0.4em; margin-bottom: 0.15em; }
+.slidev-layout h5 { font-size: 1em; }
+.slidev-layout h6 {
+  font-size: 0.875em;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding-top: 0.25em;
+  margin-left: -0.05em;
+}
+.slidev-layout h6:not(.opacity-100):not(.op-100) { opacity: 0.4; }
+
+/* No top gap for the first heading on a slide */
+.slidev-layout h1:first-child,
+.slidev-layout h2:first-child,
+.slidev-layout h3:first-child,
+.slidev-layout h4:first-child {
+  margin-top: 0;
+}
+
+/* ---- Heading counters ---- */
+
+/* .slidev-layout h1 { counter-reset: h2 h3 h4; counter-increment: h1; }
+.slidev-layout h2 { counter-reset: h3 h4;    counter-increment: h2; }
+.slidev-layout h3 { counter-reset: h4;       counter-increment: h3; }
+.slidev-layout h4 {                          counter-increment: h4; }
+
+.slidev-layout h1::before { content: counter(h1) " "; }
+.slidev-layout h2::before { content: counter(h1) "." counter(h2) " "; }
+.slidev-layout h3::before { content: counter(h1) "." counter(h2) "." counter(h3) " "; }
+.slidev-layout h4::before { content: counter(h1) "." counter(h2) "." counter(h3) "." counter(h4) " "; }
+
+.slidev-layout.cover h1,
+.slidev-layout.section h1,
+.slidev-layout.outline h1,
+.slidev-layout.focus h1 {
+  counter-increment: none;
+  counter-reset: none;
+}
+
+.slidev-layout.cover h1::before,
+.slidev-layout.section h1::before,
+.slidev-layout.outline h1::before,
+.slidev-layout.focus h1::before {
+  content: none;
+} */
+
+.slidev-layout p {
+  margin: 0.6em 0;
+}
+
+.slidev-layout a {
+  color: var(--slidev-theme-primary);
+  text-decoration: underline;
+}
+
+.slidev-layout blockquote {
+  border-left: 3px solid var(--slidev-theme-primary);
+  padding-left: 1em;
+  color: var(--slidev-theme-neutralDark);
+  opacity: 0.8;
+}
+
+.slidev-layout blockquote > * {
+  margin: 0;
+}
+
+.slidev-layout ul,
+.slidev-layout ol {
+  padding-left: 1.5em;
+}
+
+.slidev-layout ul {
+  list-style: square;
+}
+
+.slidev-layout ol {
+  list-style: decimal;
+}
+
+.slidev-layout li {
+}
+
+.slidev-layout table {
+  width: 100%;
+  border-collapse: collapse;
+  border-top: 1.5px solid var(--slidev-theme-neutralDarkest);
+  border-bottom: 1.5px solid var(--slidev-theme-neutralDarkest);
+}
+
+.slidev-layout thead tr {
+  border-bottom: 0.75px solid var(--slidev-theme-neutralDarkest);
+}
+
+.slidev-layout tbody tr {
+  border-bottom: 0.5px solid var(--slidev-theme-neutralLight);
+}
+
+.slidev-layout tbody tr:last-child {
+  border-bottom: none;
+}
+
+.slidev-layout th {
+  text-align: left;
+  font-weight: 600;
+  padding: 0.3em 0.4em;
+}
+
+.slidev-layout td {
+  padding: 0.25em 0.4em;
+}
+
+/* strong/b */
+.slidev-layout strong,
+.slidev-layout b {
+  font-weight: 600;
+  color: var(--slidev-theme-primary);
+}
+
+.slidev-layout kbd {
+  border: 1px solid var(--slidev-theme-neutralLight);
+  border-bottom-width: 2px;
+  border-radius: 3px;
+  background: rgba(128, 128, 128, 0.05);
+  padding: 0.125em 0.25em;
+  font-size: 0.75em;
+  --uno: font-mono;
+}

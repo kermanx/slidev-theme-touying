@@ -1,0 +1,53 @@
+{
+  "name": "slidev-theme-touying",
+  "version": "0.1.0",
+  "description": "A Slidev theme inspired by typst-touying",
+  "keywords": [
+    "slidev-theme",
+    "slidev",
+    "touying",
+    "dewdrop"
+  ],
+  "homepage": "",
+  "license": "MIT",
+  "engines": {
+    "slidev": ">=0.50.0"
+  },
+  "scripts": {
+    "dev": "slidev",
+    "build": "slidev build",
+    "preview": "slidev preview"
+  },
+  "slidev": {
+    "colorSchema": "light",
+    "defaults": {
+      "aspectRatio": "16/9",
+      "fonts": {
+        "serif": "Libertinus Serif, Linux Libertine, Noto Serif SC, Source Han Serif SC, Noto Serif CJK SC, Georgia, serif",
+        "sans": "Fira Sans",
+        "mono": "Fira Code",
+        "weights": "400,600"
+      },
+      "themeConfig": {
+        "primary": "#0c4842",
+        "neutralDarkest": "#000000",
+        "neutralDark": "#202020",
+        "neutralLight": "#f3f3f3",
+        "neutralLightest": "#ffffff",
+        "alpha": 0.4,
+        "sidebarWidth": "10em",
+        "miniSlidesHeight": "2em"
+      }
+    }
+  },
+  "files": [
+    "components",
+    "layouts",
+    "setup",
+    "styles",
+    "package.json"
+  ],
+  "devDependencies": {
+    "@slidev/cli": "^52.14.1"
+  }
+}
