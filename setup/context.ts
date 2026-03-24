@@ -16,7 +16,7 @@ export interface TouConfig {
 
 const DEFAULTS: TouConfig = {
   preset: 'dewdrop',
-  navigation: 'sidebar',
+  navigation: 'mini-slides',
   footer: '',
   footerRight: '',
 }

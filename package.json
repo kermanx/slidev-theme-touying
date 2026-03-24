@@ -8,15 +8,17 @@
     "touying",
     "dewdrop"
   ],
-  "homepage": "",
+  "homepage": "https://github.com/kermanx/slidev-theme-touying#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kermanx/slidev-theme-touying.git"
+  },
   "license": "MIT",
   "engines": {
-    "slidev": ">=0.50.0"
+    "slidev": ">=0.52.0"
   },
   "scripts": {
-    "dev": "slidev",
-    "build": "slidev build",
-    "preview": "slidev preview"
+    "dewdrop": "slidev ./examples/dewdrop.md"
   },
   "slidev": {
     "colorSchema": "light",
@@ -45,9 +47,15 @@
     "layouts",
     "setup",
     "styles",
-    "package.json"
+    "themes",
+    "package.json",
+    "README.md",
+    "LICENSE",
+    "slides.md",
+    "uno.config.ts"
   ],
   "devDependencies": {
-    "@slidev/cli": "^52.14.1"
+    "@slidev/cli": "^52.14.1",
+    "@types/node": "^25.5.0"
   }
 }

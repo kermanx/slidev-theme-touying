@@ -30,7 +30,8 @@ jobs:
         run: nci
 
       - name: Build
-        run: nr build --base /${{github.event.repository.name}}/
+        run: |
+          nr slidev build ./examples/dewdrop.md --base /${{github.event.repository.name}}/dewdrop/
 
       - name: Setup Pages
         uses: actions/configure-pages@v4

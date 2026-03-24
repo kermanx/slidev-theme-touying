@@ -1,15 +1,15 @@
 ---
-theme: ./
+theme: ../
 layout: cover
 title: slidev-theme-touying
-subtitle: Dewdrop — A Slidev Theme
+subtitle: Dewdrop
 author: Kerman
 date: 2026
 institution: Inspired by typst-touying
 
 touying:
   preset: dewdrop
-  navigation: mini-slides
+  navigation: mini-slides # sidebar | mini-slides | none
   footer: slidev-theme-touying · Dewdrop
   footerRight: ''
 ---
