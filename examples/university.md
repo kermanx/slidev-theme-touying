@@ -3,7 +3,7 @@ theme: ../
 title: slidev-theme-touying
 subtitle: University
 author: Author A and Author B
-logo: 🏫  # Can also be an image path
+logo: https://sli.dev/logo.svg
 routerMode: hash
 
 touying:
@@ -37,7 +37,7 @@ It features a structured academic style: a bold header bar with progress indicat
 ```yaml
 touying:
   preset: university
-logo: 🏫   # emoji or image path shown in the header
+logo: /logo.svg
 ```
 
 ---
@@ -141,7 +141,7 @@ const sum = (a: number, b: number): number => a + b
 | `primary` | color | `#04364A` | Header, section, footer-a |
 | `secondary` | color | `#176B87` | Footer-b |
 | `tertiary` | color | `#448C95` | Footer-c, progress bg |
-| `logo` | string | — | Emoji/text shown in header & cover |
+| `logo` | string | — | Image source shown in header & cover |
 
 ---
 

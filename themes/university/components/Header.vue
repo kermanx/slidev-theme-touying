@@ -12,20 +12,14 @@
 import { useNav, useSlideContext } from '@slidev/client'
 import TitleRenderer from '#slidev/title-renderer'
 import { computed } from 'vue'
-import { useCurrentSectionSlideNo, useSlideStructure } from '../../../composables/useSlideStructure'
+import { useCurrentSectionSlideNo } from '../../../composables/useSlideStructure'
 import ProgressBar from './ProgressBar.vue'
 
 const { slides } = useNav()
 const { $page } = useSlideContext()
-const { sections } = useSlideStructure()
 const currentSectionSlideNo = useCurrentSectionSlideNo()
 
-
-
-const logo = computed(() => {
-  const first = slides.value?.[0]
-  return first?.meta?.slide?.frontmatter?.logo ?? ''
-})
+const logo = computed(() => slides.value[0].meta.slide.frontmatter.logo ?? '')
 </script>
 
 <template>
@@ -39,7 +33,7 @@ const logo = computed(() => {
         <span class="uni-header-section">
           <TitleRenderer class="tou-title" :no="currentSectionSlideNo" />
         </span>
-        <span v-if="logo" class="uni-header-logo">{{ logo }}</span>
+        <img v-if="logo" :src="logo" class="uni-header-logo" />
       </span>
     </div>
   </header>
@@ -55,39 +49,41 @@ const logo = computed(() => {
   flex-direction: column;
   z-index: 10;
   background: var(--slidev-theme-neutralLightest);
-}
 
-.uni-header-row {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  padding: 0.35em 1.6em 0.3em;
-  gap: 1em;
-}
+  .uni-header-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 0.35em 1.6em 0.3em;
+    gap: 1em;
+  }
 
-.uni-header-left {
-  font-size: 2em;
-  font-weight: 600;
-  color: var(--slidev-theme-primary);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+  .uni-header-left {
+    font-size: 2em;
+    font-weight: 600;
+    color: var(--slidev-theme-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 
-.uni-header-right {
-  font-size: 1.2em;
-  color: var(--slidev-theme-secondary);
-  display: flex;
-  align-items: end;
-  gap: 0.4em;
-  flex-shrink: 0;
-}
+  .uni-header-right {
+    font-size: 1.2em;
+    color: var(--slidev-theme-secondary);
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+    flex-shrink: 0;
+  }
 
-.uni-header-section {
-  opacity: 0.65;
-}
+  .uni-header-section {
+    opacity: 0.65;
+  }
 
-.uni-header-logo {
-  font-size: 1.2em;
+  .uni-header-logo {
+    height: 1.2em;
+    width: auto;
+    object-fit: contain;
+  }
 }
 </style>

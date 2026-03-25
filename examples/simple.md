@@ -104,7 +104,6 @@ const sum = (a: number, b: number): number => a + b
 |------|------|---------|-------------|
 | `--slidev-theme-primary` | color | `#007a7a` | Accent color |
 | `footer` | string | `''` | Left footer text |
-| `logo` | string | — | Header right text/emoji |
 
 ---
 

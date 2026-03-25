@@ -51,14 +51,14 @@ function numWidth(colIdx: number): string {
   const maxNo = col[col.length - 1].idx + 1
   const digits = String(maxNo).length
   // digit em-width ≈ 0.55em each, plus "." and a small gap
-  return `${digits * 0.55 + 0.45}em`
+  return `${digits * 0.55 + 0.18}em`
 }
 
 function subNumWidth(sectionIdx: number, subCount: number): string {
   const secDigits = String(sectionIdx + 1).length
   const subDigits = String(subCount).length
   // "X.Y." — two numbers, two dots, a gap
-  return `${(secDigits + subDigits) * 0.55 + 0.9}em`
+  return `${(secDigits + subDigits) * 0.55 + 0.16}em`
 }
 
 function getItemState(idx: number): 'active' | 'past' | 'future' | 'neutral' {
@@ -112,7 +112,7 @@ function getItemState(idx: number): 'active' | 'past' | 'future' | 'neutral' {
               :class="[getItemState(idx), sub.no === $page ? 'dew-outline-subitem-current' : '']"
               @click="go(sub.no)"
             >
-              <span class="dew-outline-num" :style="{ width: subNumWidth(idx, section.subsections.length) }">{{ idx + 1 }}.{{ subIdx + 1 }}.</span>
+              <span class="dew-outline-num" :style="{ width: subNumWidth(idx, section.subsections.length) }">{{ idx + 1 }}.{{ subIdx + 1 }}</span>
               <span class="dew-outline-title">
                 <TitleRenderer class="tou-title" :no="sub.no" />
               </span>
@@ -161,7 +161,7 @@ function getItemState(idx: number): 'active' | 'past' | 'future' | 'neutral' {
   cursor: pointer;
   transition: opacity 0.3s ease, color 0.3s ease;
   line-height: 1.4;
-  margin-bottom: 0.35em;
+  margin: 0.15em 0;
 }
 
 .dew-outline-subitem {
@@ -183,7 +183,6 @@ function getItemState(idx: number): 'active' | 'past' | 'future' | 'neutral' {
 
 .dew-outline-num {
   flex-shrink: 0;
-  text-align: right;
 }
 
 .dew-outline-title {

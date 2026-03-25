@@ -43,7 +43,7 @@ const useLinebreaks = computed(() => {
     >
       <!-- Section name -->
       <span class="dew-mini-slides-section-title" @click="go(section.no)">
-        <TitleRenderer :no="section.no" />
+        <TitleRenderer class="tou-title" :no="section.no" />
       </span>
 
       <!-- One row of dots per subsection (linebreaks) or single row -->

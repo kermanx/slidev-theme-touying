@@ -12,13 +12,7 @@ import { computed } from 'vue'
 import { useSlideContext } from '@slidev/client'
 
 const { $slidev, $frontmatter } = useSlideContext()
-
-const props = defineProps<{ logo?: string }>()
-
-const logoIsImage = computed(() => {
-  const logo = ($frontmatter as any)?.logo ?? props.logo ?? ''
-  return logo.length > 3
-})
+const logo = computed(() => $frontmatter.logo ?? $slidev.nav.slides[0].meta.slide.frontmatter.logo)
 
 function parseAuthors(raw: string | undefined): string[][] {
   if (!raw) return []
@@ -45,9 +39,8 @@ const authorChunks = computed(() =>
 <template>
   <div class="slidev-layout cover">
     <!-- Logo top-right -->
-    <template v-if="$frontmatter.logo">
-      <img v-if="logoIsImage" :src="$frontmatter.logo" class="uni-cover-logo uni-cover-logo-img" />
-      <div v-else class="uni-cover-logo uni-cover-logo-text">{{ $frontmatter.logo }}</div>
+    <template v-if="logo">
+      <img :src="logo" class="uni-cover-logo" />
     </template>
 
     <div class="uni-cover-inner">
@@ -108,13 +101,6 @@ const authorChunks = computed(() =>
     top: 1em;
     right: 1.5em;
     line-height: 1;
-  }
-
-  .uni-cover-logo-text {
-    font-size: 2em;
-  }
-
-  .uni-cover-logo-img {
     height: 2.5em;
     width: auto;
     object-fit: contain;

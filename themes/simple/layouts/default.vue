@@ -2,7 +2,7 @@
 /**
  * Simple default slide.
  *
- * Header: current heading (section or slide title), logo right — 0.6em, gray (#aaaaaa)
+ * Header: current heading (section or slide title)
  * Footer: left text, page/total right — 0.6em, gray
  */
 import TitleRenderer from '#slidev/title-renderer'
@@ -16,9 +16,6 @@ const { slides } = useNav()
 const { $page } = useSlideContext()
 const currentSectionSlideNo = useCurrentSectionSlideNo()
 
-const logo = computed(() =>
-  slides.value?.[0]?.meta?.slide?.frontmatter?.logo ?? '',
-)
 const total = computed(() => slides.value?.length ?? 1)
 </script>
 
@@ -28,7 +25,6 @@ const total = computed(() => slides.value?.length ?? 1)
       <span class="spl-header-left">
         <TitleRenderer class="tou-title" :no="currentSectionSlideNo" />
       </span>
-      <span class="spl-header-right">{{ logo }}</span>
     </header>
     <div class="spl-content">
       <slot />

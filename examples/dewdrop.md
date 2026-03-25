@@ -7,7 +7,7 @@ routerMode: hash
 
 touying:
   preset: dewdrop
-  navigation: sidebar # sidebar | mini-slides | none
+  navigation: mini-slides # sidebar | mini-slides | none
   footer: slidev-theme-touying · Dewdrop
   footerRight: ''
 ---
@@ -26,7 +26,7 @@ layout: outline
 layout: section
 ---
 
-# Theme-Specific Features
+# About the Theme
 
 ---
 
