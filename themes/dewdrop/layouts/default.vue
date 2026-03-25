@@ -35,10 +35,10 @@ const config = useTouyingConfig()
 
 <style>
 .tou-preset-dewdrop.tou-nav-sidebar {
-  --tou-default-content-padding: 1.2em var(--slidev-theme-sidebarWidth) 2em var(--slidev-theme-sidebarWidth);
+  --tou-default-content-padding: 1.2em var(--tou-sidebar-width) 2em var(--tou-sidebar-width);
 }
 .tou-preset-dewdrop.tou-nav-mini-slides {
-  --tou-default-content-padding: calc(var(--slidev-theme-miniSlidesHeight) + 1em) 2.4em 2.5em 2.4em;
+  --tou-default-content-padding: calc(var(--tou-mini-slides-height) + 1em) 2.4em 2.5em 2.4em;
 }
 .tou-preset-dewdrop.tou-nav-none {
   --tou-default-content-padding: 2em 2.4em 2.5em 2.4em;

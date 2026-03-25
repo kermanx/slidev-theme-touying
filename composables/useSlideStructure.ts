@@ -16,6 +16,8 @@ import { createSharedComposable } from '@vueuse/core'
 export interface SlideSubsection {
   no: number
   title: string
+  /** Slide numbers belonging to this subsection (excluding the subsection slide itself) */
+  slides: number[]
 }
 
 export interface SlideSection {
@@ -35,6 +37,7 @@ export interface SlideSection {
 export function buildSectionStructure(slides: SlideRoute[]): SlideSection[] {
   const sections: SlideSection[] = []
   let currentSection: SlideSection | null = null
+  let currentSubsection: SlideSubsection | null = null
 
   for (const slide of slides) {
     const layout = slide.meta.layout
@@ -49,6 +52,7 @@ export function buildSectionStructure(slides: SlideRoute[]): SlideSection[] {
         slides: [],
         subsections: [],
       }
+      currentSubsection = null
       sections.push(currentSection)
     }
     else if (layout === 'cover' || layout === 'outline' || layout === 'focus') {
@@ -58,8 +62,24 @@ export function buildSectionStructure(slides: SlideRoute[]): SlideSection[] {
       currentSection.slides.push(slide.no)
       const title = slide.meta.slide?.frontmatter?.title ?? slide.meta.slide?.title
       const level = slide.meta.slide?.level || NaN
+
       if (title && level <= 2) {
-        currentSection.subsections.push({ no: slide.no, title })
+        // This slide starts a new subsection
+        currentSubsection = { no: slide.no, title, slides: [] }
+        currentSection.subsections.push(currentSubsection)
+      }
+      else if (currentSubsection) {
+        // Regular slide inside current subsection
+        currentSubsection.slides.push(slide.no)
+      }
+      else {
+        // Regular slide before any subsection — attach to a synthetic "pre" subsection
+        if (!currentSection.subsections.length || currentSection.subsections[0].no !== currentSection.no) {
+          const pre: SlideSubsection = { no: currentSection.no, title: '', slides: [] }
+          currentSection.subsections.unshift(pre)
+          currentSubsection = pre
+        }
+        currentSection.subsections[0].slides.push(slide.no)
       }
     }
   }

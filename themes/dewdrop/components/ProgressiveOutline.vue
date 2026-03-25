@@ -226,7 +226,7 @@ function getItemState(idx: number): 'active' | 'past' | 'future' | 'neutral' {
 .dew-outline-item.future,
 .dew-outline-subitem.past,
 .dew-outline-subitem.future {
-  opacity: var(--slidev-theme-alpha);
+  opacity: var(--tou-alpha);
   color: var(--slidev-theme-neutralDarkest);
 }
 

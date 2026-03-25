@@ -1,6 +1,7 @@
-import { computed, watch, watchEffect } from 'vue'
+import { computed, watchEffect } from 'vue'
 import { createSharedComposable } from '@vueuse/core'
 import { useNav } from '@slidev/client'
+import { deepMerge } from '@antfu/utils'
 
 // ---- Types ----------------------------------------------------------------
 
@@ -11,6 +12,15 @@ export interface TouyingConfig {
   footer: string
   footerRight: string
   outlineRowsPerCol: number
+  alpha: number
+  miniSlides: {
+    height: string,
+    /** true: always one row per subsection; false: all dots in one row; auto (default): one row per subsection only if max subsections per section <= 3 */
+    linebreaks: true | false | 'auto'
+  },
+  sidebar: {
+    width: string
+  }
 }
 
 // ---- Defaults & maps -------------------------------------------------------
@@ -21,6 +31,14 @@ const DEFAULTS: TouyingConfig = {
   footer: '',
   footerRight: '',
   outlineRowsPerCol: 12,
+  alpha: 0.3,
+  miniSlides: {
+    height: '2em',
+    linebreaks: 'auto',
+  },
+  sidebar: {
+    width: '10em',
+  },
 }
 
 // ---- Shared composable -----------------------------------------------------
@@ -31,8 +49,8 @@ export const useTouyingConfig = createSharedComposable(() => {
   /** Non-CSS config from headmatter `touying:` */
   const config = computed<TouyingConfig>(() => {
     const first = slides.value?.[0]
-    const touying = first?.meta?.slide?.frontmatter?.touying ?? {}
-    return { ...DEFAULTS, ...touying }
+    const touying = first.meta.slide.frontmatter.touying ?? {}
+    return deepMerge(DEFAULTS, touying) as TouyingConfig
   })
 
   watchEffect((onCleanup) => {
@@ -45,6 +63,12 @@ export const useTouyingConfig = createSharedComposable(() => {
     const className = `tou-nav-${config.value.navigation}`
     document.documentElement.classList.add(className)
     onCleanup(() => document.documentElement.classList.remove(className))
+  })
+
+  watchEffect(() => {
+    document.documentElement.style.setProperty('--tou-alpha', String(config.value.alpha))
+    document.documentElement.style.setProperty('--tou-mini-slides-height', config.value.miniSlides.height)
+    document.documentElement.style.setProperty('--tou-sidebar-width', config.value.sidebar.width)
   })
 
   return config

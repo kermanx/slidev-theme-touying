@@ -8,10 +8,6 @@ routerMode: hash
 
 touying:
   preset: university
-themeConfig:
-  primary: '#04364A'
-  secondary: '#176B87'
-  tertiary: '#448C95'
 ---
 
 # slidev-theme-touying
@@ -41,16 +37,7 @@ It features a structured academic style: a bold header bar with progress indicat
 ```yaml
 touying:
   preset: university
-themeConfig:
-  primary: '#04364A'      # header title, section title, footer-a
-  secondary: '#176B87'    # footer-b (middle)
-  tertiary: '#448C95'     # footer-c (right), progress bar bg
-```
-
-Optional: set a logo emoji or text on the cover slide:
-
-```yaml
-logo: 🎓
+logo: 🏫   # emoji or image path shown in the header
 ```
 
 ---

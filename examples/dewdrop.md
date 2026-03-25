@@ -42,22 +42,19 @@ The original Dewdrop features a clean serif style, progressive outline navigatio
 
 All theme options are set in the first slide's frontmatter.
 
-**`touying:`** — non-CSS options
-
 ```yaml
 touying:
-  navigation: sidebar      # sidebar | mini-slides | none
-  footer: 'Author · Org'
-```
-
-**`themeConfig:`** — CSS variables (injected automatically by Slidev)
-
-```yaml
-themeConfig:
-  primary: '#0c4842'
-  alpha: 0.4               # inactive section opacity
-  sidebarWidth: '10em'
-  miniSlidesHeight: '2em'
+  preset: dewdrop
+  navigation: mini-slides   # sidebar | mini-slides | none
+  footer: My Presentation
+  footerRight: ''
+  outlineRowsPerCol: 12
+  alpha: 0.3
+  miniSlides:
+    height: '2em'
+    linebreaks: auto        # true | false | auto
+  sidebar:
+    width: '10em'
 ```
 
 ---

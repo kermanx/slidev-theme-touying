@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@antfu/utils':
+        specifier: ^9.3.0
+        version: 9.3.0
       '@fontsource/libertinus-serif':
         specifier: ^5.2.1
         version: 5.2.1

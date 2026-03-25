@@ -54,6 +54,7 @@
     "@types/node": "^25.5.0"
   },
   "dependencies": {
+    "@antfu/utils": "^9.3.0",
     "@fontsource/libertinus-serif": "^5.2.1",
     "@vueuse/core": "^14.2.1"
   }

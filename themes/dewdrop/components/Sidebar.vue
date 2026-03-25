@@ -61,7 +61,7 @@ function getSlideName(no: number): string {
   position: fixed;
   top: 0;
   right: 0;
-  width: var(--slidev-theme-sidebarWidth);
+  width: var(--tou-sidebar-width);
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -89,7 +89,7 @@ function getSlideName(no: number): string {
 
 .dew-sidebar-section-title.inactive {
   color: var(--slidev-theme-neutralDarkest);
-  opacity: var(--slidev-theme-alpha);
+  opacity: var(--tou-alpha);
 }
 
 .dew-sidebar-subsection {
@@ -107,6 +107,6 @@ function getSlideName(no: number): string {
 
 .dew-sidebar-subsection.inactive {
   color: var(--slidev-theme-neutralDarkest);
-  opacity: var(--slidev-theme-alpha);
+  opacity: var(--tou-alpha);
 }
 </style>

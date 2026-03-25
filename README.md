@@ -60,6 +60,10 @@ All options go under the `touying:` key in the **root** frontmatter.
 | `footer` | `string` | `''` | Footer left text |
 | `footerRight` | `string` | `''` | Footer right text |
 | `outlineRowsPerCol` | `number` | `12` | Max rows per column in the outline |
+| `alpha` | `number` | `0.3` | Opacity of inactive sections in navigation |
+| `miniSlides.height` | `string` | `'2em'` | Height of the mini-slides bar |
+| `miniSlides.linebreaks` | `true \| false \| 'auto'` | `'auto'` | Dot grouping in mini-slides mode (see below) |
+| `sidebar.width` | `string` | `'10em'` | Width of the sidebar (also used as symmetric horizontal margin) |
 
 ### Dewdrop-specific
 
@@ -72,20 +76,30 @@ touying:
   footer: My Presentation
   footerRight: ''
   outlineRowsPerCol: 12
+  alpha: 0.3
+  miniSlides:
+    height: '2em'
+    linebreaks: auto        # true | false | auto
+  sidebar:
+    width: '10em'
 ```
+
+`miniSlides.linebreaks` controls dot grouping in mini-slides mode:
+
+| Value | Behaviour |
+|-------|-----------|
+| `true` | One row of dots per subsection (h2 slide) |
+| `false` | All dots in a single row |
+| `auto` | Like `true`, unless any section has more than 3 subsections |
 
 ### University-specific
 
-The University preset features a header bar with a section/slide title, a tri-color footer, and a configurable logo. Colors are set via Slidev's `themeConfig`.
+The University preset features a header bar with a section/slide title, a tri-color footer, and a configurable logo.
 
 ```yaml
 touying:
   preset: university
 logo: 🏫   # emoji or image path shown in the header
-themeConfig:
-  primary: '#04364A'
-  secondary: '#176B87'
-  tertiary: '#448C95'
 ```
 
 ## License

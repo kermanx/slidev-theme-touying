@@ -1,17 +1,33 @@
 <script setup lang="ts">
 /**
- * TouMiniSlides
+ * MiniSlides — Dewdrop top navigation bar.
  *
- * Top navigation bar (Dewdrop "mini-slides" mode).
- * Shows section names with a row of small dots for each slide in that section.
- * The current slide's dot is filled; others are hollow.
- * Non-current sections are faded.
+ * Each section is a column. Inside each column:
+ *   - Section title (click → section slide)
+ *   - Dots grouped by subsection (one row per subsection) if linebreaks is
+ *     effectively true, otherwise all dots in a single row.
+ *
+ * miniSlides.linebreaks:
+ *   true  — always one row per subsection
+ *   false — always one row for all slides
+ *   auto  — one row per subsection only if max subsections across all sections <= 3
  */
+import { computed } from 'vue'
 import { useNav } from '@slidev/client'
 import { useSlideStructure } from '../../../composables/useSlideStructure'
+import { useTouyingConfig } from '../../../composables/useTouyingConfig'
 
 const { currentPage, go } = useNav()
 const { sections, currentSectionIndex } = useSlideStructure()
+const config = useTouyingConfig()
+
+const useLinebreaks = computed(() => {
+  const setting = config.value.miniSlides.linebreaks
+  if (setting === true) return true
+  if (setting === false) return false
+  // auto: use linebreaks only if no section has more than 3 subsections
+  return sections.value.every(s => s.subsections.length <= 3)
+})
 </script>
 
 <template>
@@ -22,17 +38,37 @@ const { sections, currentSectionIndex } = useSlideStructure()
       class="dew-mini-slides-section"
       :class="{ inactive: idx !== currentSectionIndex }"
     >
-      <!-- Section name (click → go to section slide) -->
-      <span
-        class="dew-mini-slides-section-title"
-        @click="go(section.no)"
-        style="cursor: pointer"
-      >
+      <!-- Section name -->
+      <span class="dew-mini-slides-section-title" @click="go(section.no)">
         {{ section.title }}
       </span>
 
-      <!-- One dot per slide in this section, grouped below the title -->
-      <div class="dew-mini-slides-dots">
+      <!-- One row of dots per subsection (linebreaks) or single row -->
+      <template v-if="useLinebreaks && section.subsections.length">
+        <div
+          v-for="sub in section.subsections"
+          :key="sub.no"
+          class="dew-mini-slides-dots"
+        >
+          <span
+            v-if="sub.no !== section.no"
+            class="dew-mini-dot"
+            :class="{ filled: sub.no === currentPage }"
+            :title="`Slide ${sub.no}`"
+            @click="go(sub.no)"
+          />
+          <span
+            v-for="slideNo in sub.slides"
+            :key="slideNo"
+            class="dew-mini-dot"
+            :class="{ filled: slideNo === currentPage }"
+            :title="`Slide ${slideNo}`"
+            @click="go(slideNo)"
+          />
+        </div>
+      </template>
+      <!-- Single row -->
+      <div v-else class="dew-mini-slides-dots">
         <span
           v-for="slideNo in section.slides"
           :key="slideNo"
@@ -55,10 +91,9 @@ const { sections, currentSectionIndex } = useSlideStructure()
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  padding: 0.6em calc(2.4em / 0.7) 0;
+  padding: 0.6em calc(2em / 0.7) 0;
   gap: 0;
   font-size: 0.7em;
-  background: var(--slidev-theme-neutralLightest);
   box-sizing: border-box;
   overflow: hidden;
 }
@@ -73,13 +108,14 @@ const { sections, currentSectionIndex } = useSlideStructure()
 }
 
 .dew-mini-slides-section.inactive {
-  opacity: var(--slidev-theme-alpha);
+  opacity: var(--tou-alpha);
 }
 
 .dew-mini-slides-section-title {
   font-weight: 600;
   color: var(--slidev-theme-primary);
   line-height: 1.3;
+  cursor: pointer;
 }
 
 .dew-mini-slides-section.inactive .dew-mini-slides-section-title {
@@ -90,8 +126,9 @@ const { sections, currentSectionIndex } = useSlideStructure()
   display: flex;
   flex-direction: row;
   gap: 0.25em;
-  margin-top: 0.2em;
+  margin-top: 0.15em;
   margin-left: 2px;
+  min-height: 9px; /* keep row visible even if no dots */
 }
 
 .dew-mini-dot {
@@ -102,6 +139,7 @@ const { sections, currentSectionIndex } = useSlideStructure()
   border: 1.5px solid var(--slidev-theme-neutralDarkest);
   cursor: pointer;
   transition: background 0.2s ease, border-color 0.2s ease;
+  flex-shrink: 0;
 }
 
 .dew-mini-dot.filled {
@@ -117,5 +155,4 @@ const { sections, currentSectionIndex } = useSlideStructure()
   background: var(--slidev-theme-neutralDarkest);
   border-color: var(--slidev-theme-neutralDarkest);
 }
-
 </style>
