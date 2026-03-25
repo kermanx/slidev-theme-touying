@@ -13,9 +13,9 @@ import { useNav, useSlideContext } from '@slidev/client'
 const { slides } = useNav()
 const { $page } = useSlideContext()
 
-const first = computed(() => slides.value?.[0]?.meta?.slide?.frontmatter ?? {})
+const first = computed(() => slides.value[0].meta.slide.frontmatter ?? {})
 const author = computed(() => first.value.author ?? '')
-const title = computed(() => first.value['short-title'] ?? first.value.title ?? '')
+const title = computed(() => first.value.title ?? '')
 const date = computed(() => first.value.date ?? '')
 const total = computed(() => slides.value?.length ?? 1)
 </script>

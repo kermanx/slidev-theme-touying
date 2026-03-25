@@ -5,15 +5,16 @@
  * Header: current heading (section or slide title), logo right — 0.6em, gray (#aaaaaa)
  * Footer: left text, page/total right — 0.6em, gray
  */
+import TitleRenderer from '#slidev/title-renderer'
 import { useNav, useSlideContext } from '@slidev/client'
 import { computed } from 'vue'
-import { useCurrentSectionTitle } from '../../../composables/useSlideStructure'
+import { useCurrentSectionSlideNo } from '../../../composables/useSlideStructure'
 import { useTouyingConfig } from '../../../composables/useTouyingConfig'
 
 const config = useTouyingConfig()
 const { slides } = useNav()
 const { $page } = useSlideContext()
-const currentSectionTitle = useCurrentSectionTitle()
+const currentSectionSlideNo = useCurrentSectionSlideNo()
 
 const logo = computed(() =>
   slides.value?.[0]?.meta?.slide?.frontmatter?.logo ?? '',
@@ -24,7 +25,9 @@ const total = computed(() => slides.value?.length ?? 1)
 <template>
   <div class="slidev-layout default">
     <header class="spl-header">
-      <span class="spl-header-left">{{ currentSectionTitle }}</span>
+      <span class="spl-header-left">
+        <TitleRenderer class="tou-title" :no="currentSectionSlideNo" />
+      </span>
       <span class="spl-header-right">{{ logo }}</span>
     </header>
     <div class="spl-content">

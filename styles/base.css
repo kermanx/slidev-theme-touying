@@ -176,3 +176,7 @@
   font-size: 0.75em;
   --uno: font-mono;
 }
+
+.tou-title p {
+  margin: 0;
+}

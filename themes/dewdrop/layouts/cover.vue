@@ -30,8 +30,8 @@ const { $slidev, $frontmatter } = useSlideContext()
 
       <!-- Meta info -->
       <div class="cover-meta">
-        <div v-if="$frontmatter.author || $slidev.configs.author" class="cover-author">
-          <slot name="author">{{ $frontmatter.author ?? $slidev.configs.author }}</slot>
+        <div v-if="$slidev.configs.author" class="cover-author">
+          <slot name="author">{{ $slidev.configs.author }}</slot>
         </div>
       </div>
 

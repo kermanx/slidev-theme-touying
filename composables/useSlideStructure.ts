@@ -15,7 +15,6 @@ import { createSharedComposable } from '@vueuse/core'
 
 export interface SlideSubsection {
   no: number
-  title: string
   /** Slide numbers belonging to this subsection (excluding the subsection slide itself) */
   slides: number[]
 }
@@ -23,8 +22,6 @@ export interface SlideSubsection {
 export interface SlideSection {
   /** Section slide number (1-indexed) */
   no: number
-  /** Section title (from slide title or frontmatter.title) */
-  title: string
   /** Slide numbers that belong to this section (excluding the section slide itself) */
   slides: number[]
   /** Member slides that have a title (shown as subsections at depth >= 2) */
@@ -45,7 +42,6 @@ export function buildSectionStructure(slides: SlideRoute[]): SlideSection[] {
     if (layout === 'section') {
       currentSection = {
         no: slide.no,
-        title: slide.meta.slide.title ?? `Section ${sections.length + 1}`,
         slides: [],
         subsections: [],
       }
@@ -62,7 +58,7 @@ export function buildSectionStructure(slides: SlideRoute[]): SlideSection[] {
 
       if (title && level <= 2) {
         // This slide starts a new subsection
-        currentSubsection = { no: slide.no, title, slides: [] }
+        currentSubsection = { no: slide.no, slides: [] }
         currentSection.subsections.push(currentSubsection)
       }
       else if (currentSubsection) {
@@ -72,7 +68,7 @@ export function buildSectionStructure(slides: SlideRoute[]): SlideSection[] {
       else {
         // Regular slide before any subsection — attach to a synthetic "pre" subsection
         if (!currentSection.subsections.length || currentSection.subsections[0].no !== currentSection.no) {
-          const pre: SlideSubsection = { no: currentSection.no, title: '', slides: [] }
+          const pre: SlideSubsection = { no: currentSection.no, slides: [] }
           currentSection.subsections.unshift(pre)
           currentSubsection = pre
         }
@@ -108,15 +104,15 @@ export function useCurrentSectionIndex() {
   ))
 }
 
-export function useCurrentSectionTitle() {
-  const { $page, $nav } = useSlideContext()
+export function useCurrentSectionSlideNo() {
+  const { $page } = useSlideContext()
   const { sections } = useSlideStructure()
   const sectionIndex = useCurrentSectionIndex()
   return computed(() => {
     if ($page.value < sections.value[0]?.no) {
-      return $nav.value.slides[0].meta.slide.title
+      return 1
     } else {
-      return sections.value[sectionIndex.value]?.title ?? ''
+      return sections.value[sectionIndex.value]?.no
     }
   })
 }

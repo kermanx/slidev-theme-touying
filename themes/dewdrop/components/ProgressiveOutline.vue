@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useNav, useSlideContext } from '@slidev/client'
+import TitleRenderer from '#slidev/title-renderer'
 import { useCurrentSectionIndex, useSlideStructure } from '../../../composables/useSlideStructure'
 import { useTouyingConfig } from '../../../composables/useTouyingConfig'
 
@@ -95,7 +96,9 @@ function getItemState(idx: number): 'active' | 'past' | 'future' | 'neutral' {
             @click="go(section.no)"
           >
             <span class="dew-outline-num" :style="{ width: numWidth(colIdx) }">{{ idx + 1 }}.</span>
-            <span class="dew-outline-title" :data-text="section.title">{{ section.title }}</span>
+            <span class="dew-outline-title">
+              <TitleRenderer class="tou-title" :no="section.no" />
+            </span>
             <span class="dew-outline-fill" aria-hidden="true" />
             <span class="dew-outline-page">{{ section.no }}</span>
           </div>
@@ -110,7 +113,9 @@ function getItemState(idx: number): 'active' | 'past' | 'future' | 'neutral' {
               @click="go(sub.no)"
             >
               <span class="dew-outline-num" :style="{ width: subNumWidth(idx, section.subsections.length) }">{{ idx + 1 }}.{{ subIdx + 1 }}.</span>
-              <span class="dew-outline-title" :data-text="sub.title">{{ sub.title }}</span>
+              <span class="dew-outline-title">
+                <TitleRenderer class="tou-title" :no="sub.no" />
+              </span>
               <span class="dew-outline-fill" aria-hidden="true" />
               <span class="dew-outline-page">{{ sub.no }}</span>
             </div>
@@ -185,18 +190,6 @@ function getItemState(idx: number): 'active' | 'past' | 'future' | 'neutral' {
   flex-shrink: 0;
   white-space: nowrap;
   display: inline-block;
-}
-
-/* Pre-reserve bold width so layout doesn't shift on active */
-.dew-outline-title::after {
-  content: attr(data-text);
-  font-weight: 600;
-  display: block;
-  height: 0;
-  visibility: hidden;
-  overflow: hidden;
-  pointer-events: none;
-  user-select: none;
 }
 
 /* Dot leaders — fade right edge to avoid half-dots */

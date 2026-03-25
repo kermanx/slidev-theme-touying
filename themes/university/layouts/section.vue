@@ -8,33 +8,23 @@
  * - Progress bar below the title
  * - No outline (unlike Dewdrop)
  */
-import { useNav, useSlideContext } from '@slidev/client'
-import { computed } from 'vue'
-import { useSlideStructure } from '../../../composables/useSlideStructure'
+import TitleRenderer from '#slidev/title-renderer'
 import Footer from '../components/Footer.vue'
 import ProgressBar from '../components/ProgressBar.vue'
 
-const { slides } = useNav()
-const { $page } = useSlideContext()
-const { sections } = useSlideStructure()
-
-const sectionTitle = computed(() => {
-  const slide = slides.value?.find(s => s.no === $page.value)
-  return (
-    slide?.meta?.slide?.frontmatter?.title
-    ?? slide?.meta?.slide?.title
-    ?? sections.value.find(s => s.no === $page.value)?.title
-    ?? ''
-  )
-})
 </script>
 
 <template>
   <div class="slidev-layout section uni-section">
     <div class="uni-section-inner">
-      <div class="uni-section-title">{{ sectionTitle }}</div>
+      <div class="uni-section-title">
+        <TitleRenderer class="tou-title" :no="$page" />
+      </div>
       <div class="uni-section-bar">
         <ProgressBar />
+      </div>
+      <div class="uni-section-content">
+        <slot />
       </div>
     </div>
     <Footer />
@@ -74,6 +64,14 @@ const sectionTitle = computed(() => {
 
   .uni-section-bar {
     width: 100%;
+  }
+
+  .uni-section-content {
+    width: 100%;
+
+    h1 {
+      display: none;
+    }
   }
 }
 </style>

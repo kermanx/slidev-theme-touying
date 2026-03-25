@@ -16,6 +16,7 @@ import { useNav, useSlideContext } from '@slidev/client'
 import { computed } from 'vue'
 import { useCurrentSectionIndex, useSlideStructure } from '../../../composables/useSlideStructure'
 import { useTouyingConfig } from '../../../composables/useTouyingConfig'
+import TitleRenderer from '#slidev/title-renderer'
 
 const { go } = useNav()
 const { $page } = useSlideContext()
@@ -24,11 +25,11 @@ const currentSectionIndex = useCurrentSectionIndex()
 const config = useTouyingConfig()
 
 const useLinebreaks = computed(() => {
-  const setting = config.value.miniSlides.linebreaks
+  const setting = config.value.miniSlides.linebreaks ?? 'auto'
+  if (setting === 'auto') return sections.value.every(s => s.subsections.length <= 3)
   if (setting === true) return true
   if (setting === false) return false
-  // auto: use linebreaks only if no section has more than 3 subsections
-  return sections.value.every(s => s.subsections.length <= 3)
+  console.error(`Invalid miniSlides.linebreaks value: ${setting}`)
 })
 </script>
 
@@ -42,7 +43,7 @@ const useLinebreaks = computed(() => {
     >
       <!-- Section name -->
       <span class="dew-mini-slides-section-title" @click="go(section.no)">
-        {{ section.title }}
+        <TitleRenderer :no="section.no" />
       </span>
 
       <!-- One row of dots per subsection (linebreaks) or single row -->

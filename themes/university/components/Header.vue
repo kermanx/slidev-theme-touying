@@ -10,23 +10,17 @@
  * Right: current section title (primary.lighten ~65%) + logo
  */
 import { useNav, useSlideContext } from '@slidev/client'
+import TitleRenderer from '#slidev/title-renderer'
 import { computed } from 'vue'
-import { useCurrentSectionIndex, useSlideStructure } from '../../../composables/useSlideStructure'
+import { useCurrentSectionSlideNo, useSlideStructure } from '../../../composables/useSlideStructure'
 import ProgressBar from './ProgressBar.vue'
 
 const { slides } = useNav()
 const { $page } = useSlideContext()
 const { sections } = useSlideStructure()
-const currentSectionIndex = useCurrentSectionIndex()
+const currentSectionSlideNo = useCurrentSectionSlideNo()
 
-const slideTitle = computed(() => {
-  const slide = slides.value?.find(s => s.no === $page.value)
-  return slide?.meta?.slide?.frontmatter?.title ?? slide?.meta?.slide?.title ?? ''
-})
 
-const sectionTitle = computed(() =>
-  sections.value[currentSectionIndex.value]?.title ?? '',
-)
 
 const logo = computed(() => {
   const first = slides.value?.[0]
@@ -38,9 +32,13 @@ const logo = computed(() => {
   <header class="uni-header">
     <ProgressBar />
     <div class="uni-header-row">
-      <span class="uni-header-left">{{ slideTitle }}</span>
+      <span class="uni-header-left">
+        <TitleRenderer class="tou-title" :no="$page" />
+      </span>
       <span class="uni-header-right">
-        <span v-if="sectionTitle" class="uni-header-section">{{ sectionTitle }}</span>
+        <span class="uni-header-section">
+          <TitleRenderer class="tou-title" :no="currentSectionSlideNo" />
+        </span>
         <span v-if="logo" class="uni-header-logo">{{ logo }}</span>
       </span>
     </div>

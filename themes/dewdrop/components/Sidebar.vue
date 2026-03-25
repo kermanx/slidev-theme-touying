@@ -7,22 +7,13 @@
  * Clicking a section/slide navigates to it.
  */
 import { useNav, useSlideContext } from '@slidev/client'
+import TitleRenderer from '#slidev/title-renderer'
 import { useCurrentSectionIndex, useSlideStructure } from '../../../composables/useSlideStructure'
 
-const { slides, go } = useNav()
+const { go } = useNav()
 const { $page } = useSlideContext()
 const { sections } = useSlideStructure()
 const currentSectionIndex = useCurrentSectionIndex()
-
-function getSlideName(no: number): string {
-  const slide = slides.value[no - 1] // slide numbers are 1-indexed
-  // Try multiple paths: frontmatter title, parsed title, meta title
-  return (
-    slide?.meta?.slide?.frontmatter?.title
-    ?? slide?.meta?.slide?.title
-    ?? null
-  )
-}
 </script>
 
 <template>
@@ -38,20 +29,19 @@ function getSlideName(no: number): string {
         :class="idx === currentSectionIndex ? 'active' : 'inactive'"
         @click="go(section.no)"
       >
-        {{ section.title }}
+        <TitleRenderer class="tou-title" :no="section.no" />
       </div>
 
       <!-- Sub-slides (shown only when this section is active, and only if they have titles) -->
       <template v-if="idx === currentSectionIndex">
         <div
           v-for="slideNo in section.slides"
-          v-show="getSlideName(slideNo) !== null"
           :key="slideNo"
           class="dew-sidebar-subsection"
           :class="slideNo === $page ? 'active' : 'inactive'"
           @click="go(slideNo)"
         >
-          {{ getSlideName(slideNo) }}
+          <TitleRenderer class="tou-title" :no="slideNo" />
         </div>
       </template>
     </div>
