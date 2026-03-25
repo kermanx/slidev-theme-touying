@@ -12,12 +12,13 @@
  *   false — always one row for all slides
  *   auto  — one row per subsection only if max subsections across all sections <= 3
  */
-import { useNav } from '@slidev/client'
+import { useNav, useSlideContext } from '@slidev/client'
 import { computed } from 'vue'
 import { useCurrentSectionIndex, useSlideStructure } from '../../../composables/useSlideStructure'
 import { useTouyingConfig } from '../../../composables/useTouyingConfig'
 
 const { go } = useNav()
+const { $page } = useSlideContext()
 const { sections } = useSlideStructure()
 const currentSectionIndex = useCurrentSectionIndex()
 const config = useTouyingConfig()
@@ -54,7 +55,7 @@ const useLinebreaks = computed(() => {
           <span
             v-if="sub.no !== section.no"
             class="dew-mini-dot"
-            :class="{ filled: sub.no === $page.value }"
+            :class="{ filled: sub.no === $page }"
             :title="`Slide ${sub.no}`"
             @click="go(sub.no)"
           />
@@ -62,7 +63,7 @@ const useLinebreaks = computed(() => {
             v-for="slideNo in sub.slides"
             :key="slideNo"
             class="dew-mini-dot"
-            :class="{ filled: slideNo === $page.value }"
+            :class="{ filled: slideNo === $page }"
             :title="`Slide ${slideNo}`"
             @click="go(slideNo)"
           />
@@ -74,7 +75,7 @@ const useLinebreaks = computed(() => {
           v-for="slideNo in section.slides"
           :key="slideNo"
           class="dew-mini-dot"
-          :class="{ filled: slideNo === $page.value }"
+          :class="{ filled: slideNo === $page }"
           :title="`Slide ${slideNo}`"
           @click="go(slideNo)"
         />

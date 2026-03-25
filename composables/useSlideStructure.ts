@@ -58,7 +58,7 @@ export function buildSectionStructure(slides: SlideRoute[]): SlideSection[] {
     else if (currentSection) {
       currentSection.slides.push(slide.no)
       const title = slide.meta.slide.title
-      const level = slide.meta.slide.level || NaN
+      const level = slide.meta.slide.level || 0
 
       if (title && level <= 2) {
         // This slide starts a new subsection
