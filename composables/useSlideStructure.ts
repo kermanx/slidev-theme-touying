@@ -9,7 +9,7 @@
  */
 
 import { computed } from 'vue'
-import { useNav } from '@slidev/client'
+import { useNav, useSlideContext } from '@slidev/client'
 import type { SlideRoute } from '@slidev/types'
 import { createSharedComposable } from '@vueuse/core'
 
@@ -89,38 +89,34 @@ export function buildSectionStructure(slides: SlideRoute[]): SlideSection[] {
  * the current slide belongs to.
  */
 export const useSlideStructure = createSharedComposable(() => {
-  const { slides, currentPage } = useNav()
+  const { slides } = useNav()
 
   const sections = computed<SlideSection[]>(() =>
     buildSectionStructure(slides.value ?? []),
   )
 
-  /**
-   * Index (0-based) of the section that contains the given slide number.
-   * Returns -1 if the slide is not inside any section.
-   */
-  function getSectionIndex(slideNo: number): number {
-    return sections.value.findIndex(
-      sec => sec.no === slideNo || sec.slides.includes(slideNo),
-    )
-  }
-
-  const currentSectionIndex = computed(() =>
-    getSectionIndex(currentPage.value),
-  )
-
-  const currentSectionTitle = computed(() => {
-    if (currentPage.value < sections.value[0]?.no) {
-      return slides.value[0].meta.slide.title
-    } else {
-      return sections.value[currentSectionIndex.value]?.title ?? ''
-    }
-  })
-
   return {
     sections,
-    currentSectionIndex,
-    currentSectionTitle,
-    getSectionIndex,
   }
 })
+
+export function useCurrentSectionIndex() {
+  const { $page } = useSlideContext()
+  const { sections } = useSlideStructure()
+  return computed(() => sections.value.findIndex(
+    sec => sec.no === $page.value || sec.slides.includes($page.value),
+  ))
+}
+
+export function useCurrentSectionTitle() {
+  const { $page, $nav } = useSlideContext()
+  const { sections } = useSlideStructure()
+  const sectionIndex = useCurrentSectionIndex()
+  return computed(() => {
+    if ($page.value < sections.value[0]?.no) {
+      return $nav.value.slides[0].meta.slide.title
+    } else {
+      return sections.value[sectionIndex.value]?.title ?? ''
+    }
+  })
+}

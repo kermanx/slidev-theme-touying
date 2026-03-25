@@ -9,16 +9,18 @@
  * Left:  current slide title (bold, primary, 1.2em)
  * Right: current section title (primary.lighten ~65%) + logo
  */
+import { useNav, useSlideContext } from '@slidev/client'
 import { computed } from 'vue'
-import { useNav } from '@slidev/client'
-import { useSlideStructure } from '../../../composables/useSlideStructure'
+import { useCurrentSectionIndex, useSlideStructure } from '../../../composables/useSlideStructure'
 import ProgressBar from './ProgressBar.vue'
 
-const { slides, currentPage } = useNav()
-const { sections, currentSectionIndex } = useSlideStructure()
+const { slides } = useNav()
+const { $page } = useSlideContext()
+const { sections } = useSlideStructure()
+const currentSectionIndex = useCurrentSectionIndex()
 
 const slideTitle = computed(() => {
-  const slide = slides.value?.find(s => s.no === currentPage.value)
+  const slide = slides.value?.find(s => s.no === $page.value)
   return slide?.meta?.slide?.frontmatter?.title ?? slide?.meta?.slide?.title ?? ''
 })
 

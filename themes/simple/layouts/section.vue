@@ -1,19 +1,14 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useNav } from '@slidev/client'
+import { useSlideContext } from '@slidev/client'
 import { useSlideStructure } from '../../../composables/useSlideStructure'
 
-const { currentPage } = useNav()
 const { sections } = useSlideStructure()
-
-const sectionTitle = computed(() =>
-  sections.value.find(s => s.no === currentPage.value)?.title ?? '',
-)
+const { $route } = useSlideContext()
 </script>
 
 <template>
   <div class="slidev-layout section">
-    <div class="spl-section-title">{{ sectionTitle }}</div>
+    <div class="spl-section-title">{{ $route?.meta.slide.title }}</div>
   </div>
 </template>
 

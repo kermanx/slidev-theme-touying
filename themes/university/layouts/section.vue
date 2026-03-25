@@ -8,21 +8,22 @@
  * - Progress bar below the title
  * - No outline (unlike Dewdrop)
  */
+import { useNav, useSlideContext } from '@slidev/client'
 import { computed } from 'vue'
-import { useNav } from '@slidev/client'
 import { useSlideStructure } from '../../../composables/useSlideStructure'
-import ProgressBar from '../components/ProgressBar.vue'
 import Footer from '../components/Footer.vue'
+import ProgressBar from '../components/ProgressBar.vue'
 
-const { currentPage, slides } = useNav()
+const { slides } = useNav()
+const { $page } = useSlideContext()
 const { sections } = useSlideStructure()
 
 const sectionTitle = computed(() => {
-  const slide = slides.value?.find(s => s.no === currentPage.value)
+  const slide = slides.value?.find(s => s.no === $page.value)
   return (
     slide?.meta?.slide?.frontmatter?.title
     ?? slide?.meta?.slide?.title
-    ?? sections.value.find(s => s.no === currentPage.value)?.title
+    ?? sections.value.find(s => s.no === $page.value)?.title
     ?? ''
   )
 })

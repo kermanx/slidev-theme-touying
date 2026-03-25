@@ -4,14 +4,16 @@
  * Fills from left proportional to currentPage / totalSlides.
  * Left segment: primary color; right remainder: tertiary color (lighter).
  */
+import { useNav, useSlideContext } from '@slidev/client'
 import { computed } from 'vue'
-import { useNav } from '@slidev/client'
 
-const { currentPage, slides } = useNav()
+const { slides } = useNav()
+const { $page } = useSlideContext()
+
 
 const pct = computed(() => {
   const total = slides.value?.length ?? 1
-  return Math.min((currentPage.value / total) * 100, 100)
+  return Math.min(($page.value / total) * 100, 100)
 })
 </script>
 

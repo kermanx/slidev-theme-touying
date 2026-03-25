@@ -12,11 +12,11 @@
  * The "active" section is auto-detected as the section whose slide number
  * matches the current slide (this slide).
  */
-import { useNav } from '@slidev/client'
-import ProgressiveOutline from '../components/ProgressiveOutline.vue'
-import Footer from '../components/Footer.vue'
+import { useSlideContext } from '@slidev/client';
+import Footer from '../components/Footer.vue';
+import ProgressiveOutline from '../components/ProgressiveOutline.vue';
 
-const { currentPage } = useNav()
+const { $page } = useSlideContext()
 
 const props = withDefaults(defineProps<{
   /** How many heading levels to show: 1 = sections only, 2 = sections + subsections (default). */
@@ -29,7 +29,7 @@ const props = withDefaults(defineProps<{
 
     <!-- Progressive outline fills the whole slide (minus footer) -->
     <div style="width:100%; height:100%; padding-bottom:2.5em; box-sizing:border-box;">
-      <ProgressiveOutline :active-section-no="currentPage" :depth="props.depth" />
+      <ProgressiveOutline :active-section-no="$page" :depth="props.depth" />
     </div>
 
     <!-- Footer -->

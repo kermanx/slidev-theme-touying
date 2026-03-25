@@ -8,11 +8,10 @@
  * Columns default to 25% / 1fr / 25%.
  */
 import { computed } from 'vue'
-import { useNav } from '@slidev/client'
-import { useTouyingConfig } from '../../../composables/useTouyingConfig'
+import { useNav, useSlideContext } from '@slidev/client'
 
-const config = useTouyingConfig()
-const { currentPage, slides } = useNav()
+const { slides } = useNav()
+const { $page } = useSlideContext()
 
 const first = computed(() => slides.value?.[0]?.meta?.slide?.frontmatter ?? {})
 const author = computed(() => first.value.author ?? '')
@@ -26,7 +25,7 @@ const total = computed(() => slides.value?.length ?? 1)
     <div class="uni-footer-a">{{ author }}</div>
     <div class="uni-footer-b">{{ title }}</div>
     <div class="uni-footer-c">
-      <span v-if="date">{{ date }} · </span>{{ currentPage }} / {{ total }}
+      <span v-if="date">{{ date }} · </span>{{ $page }} / {{ total }}
     </div>
   </footer>
 </template>

@@ -5,14 +5,15 @@
  * Header: current heading (section or slide title), logo right — 0.6em, gray (#aaaaaa)
  * Footer: left text, page/total right — 0.6em, gray
  */
+import { useNav, useSlideContext } from '@slidev/client'
 import { computed } from 'vue'
-import { useNav } from '@slidev/client'
-import { useSlideStructure } from '../../../composables/useSlideStructure'
+import { useCurrentSectionTitle } from '../../../composables/useSlideStructure'
 import { useTouyingConfig } from '../../../composables/useTouyingConfig'
 
 const config = useTouyingConfig()
-const { slides, currentPage } = useNav()
-const { currentSectionTitle } = useSlideStructure()
+const { slides } = useNav()
+const { $page } = useSlideContext()
+const currentSectionTitle = useCurrentSectionTitle()
 
 const logo = computed(() =>
   slides.value?.[0]?.meta?.slide?.frontmatter?.logo ?? '',
@@ -31,7 +32,7 @@ const total = computed(() => slides.value?.length ?? 1)
     </div>
     <footer class="spl-footer">
       <span class="spl-footer-left">{{ config.footer }}</span>
-      <span class="spl-footer-right">{{ currentPage }} / {{ total }}</span>
+      <span class="spl-footer-right">{{ $page }} / {{ total }}</span>
     </footer>
   </div>
 </template>

@@ -9,8 +9,8 @@
 import { useNav } from '@slidev/client'
 import { useTouyingConfig } from '../../../composables/useTouyingConfig'
 
-const { currentPage, total } = useNav()
 const config = useTouyingConfig()
+const { total } = useNav()
 </script>
 
 <template>
@@ -18,7 +18,7 @@ const config = useTouyingConfig()
     <span class="dew-footer-left">{{ config.footer }}</span>
     <span class="dew-footer-right">
       <template v-if="config.footerRight">{{ config.footerRight }}</template>
-      <template v-else>{{ currentPage }} / {{ total }}</template>
+      <template v-else>{{ $page }} / {{ total }}</template>
     </span>
   </footer>
 </template>

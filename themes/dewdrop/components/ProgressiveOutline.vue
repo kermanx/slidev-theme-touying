@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { useNav } from '@slidev/client'
-import { useSlideStructure } from '../../../composables/useSlideStructure'
+import { useNav, useSlideContext } from '@slidev/client'
+import { useCurrentSectionIndex, useSlideStructure } from '../../../composables/useSlideStructure'
 import { useTouyingConfig } from '../../../composables/useTouyingConfig'
 
 const props = withDefaults(defineProps<{
@@ -15,8 +15,10 @@ const props = withDefaults(defineProps<{
   depth: 2,
 })
 
-const { go, currentPage } = useNav()
-const { sections, currentSectionIndex } = useSlideStructure()
+const { go } = useNav()
+const { $page } = useSlideContext()
+const { sections } = useSlideStructure()
+const currentSectionIndex = useCurrentSectionIndex()
 const touyingConfig = useTouyingConfig()
 
 // Pack sections into columns: fill each column up to outlineRowsPerCol rows before starting the next.
@@ -104,7 +106,7 @@ function getItemState(idx: number): 'active' | 'past' | 'future' | 'neutral' {
               v-for="(sub, subIdx) in section.subsections"
               :key="sub.no"
               class="dew-outline-subitem"
-              :class="[getItemState(idx), sub.no === currentPage ? 'dew-outline-subitem-current' : '']"
+              :class="[getItemState(idx), sub.no === $page ? 'dew-outline-subitem-current' : '']"
               @click="go(sub.no)"
             >
               <span class="dew-outline-num" :style="{ width: subNumWidth(idx, section.subsections.length) }">{{ idx + 1 }}.{{ subIdx + 1 }}.</span>

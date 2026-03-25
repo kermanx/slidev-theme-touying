@@ -6,11 +6,13 @@
  * Current section title is highlighted in primary color; all others are faded.
  * Clicking a section/slide navigates to it.
  */
-import { useNav } from '@slidev/client'
-import { useSlideStructure } from '../../../composables/useSlideStructure'
+import { useNav, useSlideContext } from '@slidev/client'
+import { useCurrentSectionIndex, useSlideStructure } from '../../../composables/useSlideStructure'
 
-const { slides, currentPage, go } = useNav()
-const { sections, currentSectionIndex } = useSlideStructure()
+const { slides, go } = useNav()
+const { $page } = useSlideContext()
+const { sections } = useSlideStructure()
+const currentSectionIndex = useCurrentSectionIndex()
 
 function getSlideName(no: number): string {
   const slide = slides.value[no - 1] // slide numbers are 1-indexed
@@ -46,7 +48,7 @@ function getSlideName(no: number): string {
           v-show="getSlideName(slideNo) !== null"
           :key="slideNo"
           class="dew-sidebar-subsection"
-          :class="slideNo === currentPage ? 'active' : 'inactive'"
+          :class="slideNo === $page ? 'active' : 'inactive'"
           @click="go(slideNo)"
         >
           {{ getSlideName(slideNo) }}
