@@ -34,7 +34,7 @@ withDefaults(defineProps<{
 </template>
 
 <style>
-.slidev-layout.outline {
+.tou-preset-dewdrop .slidev-layout.outline {
   background: var(--slidev-theme-neutralLightest);
   display: flex;
   align-items: stretch;

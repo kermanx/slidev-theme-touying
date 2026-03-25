@@ -9,9 +9,9 @@
  *         (if "and" present, never split by comma)
  */
 import { computed } from 'vue'
-import { useTouyingConfig } from '../../../composables/useTouyingConfig'
+import { useSlideContext } from '@slidev/client'
 
-useTouyingConfig()
+const { $slidev, $frontmatter } = useSlideContext()
 
 const props = defineProps<{ logo?: string }>()
 
@@ -93,7 +93,7 @@ const authorChunks = computed(() =>
 
 <style>
 /* ---- University cover ---- */
-.slidev-layout.cover {
+.tou-preset-university .slidev-layout.cover {
   position: relative;
   display: flex;
   align-items: center;

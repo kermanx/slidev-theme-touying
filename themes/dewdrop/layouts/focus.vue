@@ -19,7 +19,7 @@ useTouyingConfig()
 </template>
 
 <style>
-.slidev-layout.focus {
+.tou-preset-dewdrop .slidev-layout.focus {
   background: var(--slidev-theme-primary);
   display: flex;
   align-items: center;

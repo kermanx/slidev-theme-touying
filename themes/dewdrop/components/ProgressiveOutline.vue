@@ -131,10 +131,9 @@ function getItemState(idx: number): 'active' | 'past' | 'future' | 'neutral' {
 }
 
 .dew-outline-label {
-  font-size: 1.2em;
+  font-size: 1.6em;
   font-weight: 700;
   color: var(--slidev-theme-primary);
-  margin-bottom: 0.5em;
 }
 
 .dew-outline-list {

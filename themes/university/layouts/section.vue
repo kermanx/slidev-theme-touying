@@ -41,38 +41,38 @@ const sectionTitle = computed(() => {
 </template>
 
 <style>
-.slidev-layout.section.uni-section {
+.tou-preset-university  .slidev-layout.section.uni-section {
   width: 100%;
   height: 100%;
   position: relative;
   background: var(--slidev-theme-neutralLightest);
   overflow: hidden;
   padding: 0;
-}
 
-.uni-section-inner {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 1.8em;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 0 20%;
-  gap: 0.65em;
-}
+  .uni-section-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 1.8em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20%;
+    gap: 0.65em;
+  }
 
-.uni-section-title {
-  font-size: 2em;
-  font-weight: 600;
-  color: var(--slidev-theme-primary);
-  line-height: 1.3;
-  width: 100%;
-}
+  .uni-section-title {
+    font-size: 2em;
+    font-weight: 600;
+    color: var(--slidev-theme-primary);
+    line-height: 1.3;
+    width: 100%;
+  }
 
-.uni-section-bar {
-  width: 100%;
+  .uni-section-bar {
+    width: 100%;
+  }
 }
 </style>

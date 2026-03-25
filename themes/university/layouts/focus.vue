@@ -14,7 +14,7 @@
 </template>
 
 <style>
-.slidev-layout.focus {
+.tou-preset-university .slidev-layout.focus {
   width: 100%;
   height: 100%;
   display: flex;
@@ -28,6 +28,10 @@
 
   &, & p, & h1 {
     color: var(--slidev-theme-neutralLightest) !important;
+  }
+
+  & code {
+    background-color: rgba(255, 255, 255, 0.18);
   }
 
   & > p, & > h1 {

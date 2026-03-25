@@ -22,7 +22,7 @@ import Footer from '../components/Footer.vue'
 </template>
 
 <style>
-.slidev-layout.default {
+.tou-preset-university .slidev-layout.default {
   width: 100%;
   height: 100%;
   position: relative;

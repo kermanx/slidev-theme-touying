@@ -38,7 +38,7 @@ const props = withDefaults(defineProps<{
 </template>
 
 <style>
-.slidev-layout.section {
+.tou-preset-dewdrop .slidev-layout.section {
   background: var(--slidev-theme-neutralLightest);
   display: flex;
   align-items: stretch;

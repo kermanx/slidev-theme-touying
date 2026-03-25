@@ -44,7 +44,7 @@ const { $slidev, $frontmatter } = useSlideContext()
 </template>
 
 <style>
-.slidev-layout.cover {
+.tou-preset-dewdrop .slidev-layout.cover {
   display: flex;
   align-items: center;
   justify-content: center;

@@ -217,25 +217,3 @@ layout: focus
 ---
 
 Use `layout: focus` for key takeaways
-
----
-layout: section
----
-
-# Extensibility
-
----
-
-# Future Sub-themes
-
-The architecture is designed to support additional sub-themes. Each preset only overrides CSS variables — component logic is shared.
-
-```yaml
-touying:
-  preset: metropolis    # dewdrop | metropolis | aqua | stargazer | …
-themeConfig:
-  primary: '#eb811b'
-  neutralDark: '#23373b'
-```
-
-Planned presets follow the same conventions as typst-touying.

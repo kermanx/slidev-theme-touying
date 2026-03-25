@@ -1,4 +1,4 @@
-import { computed, watchEffect } from 'vue'
+import { computed, watch, watchEffect } from 'vue'
 import { createSharedComposable } from '@vueuse/core'
 import { useNav } from '@slidev/client'
 
@@ -35,15 +35,16 @@ export const useTouyingConfig = createSharedComposable(() => {
     return { ...DEFAULTS, ...touying }
   })
 
-  watchEffect(() => {
-    const nav = config.value.navigation
-    document.documentElement.classList.toggle('tou-nav-sidebar', nav === 'sidebar')
-    document.documentElement.classList.toggle('tou-nav-mini-slides', nav === 'mini-slides')
-    document.documentElement.classList.toggle('tou-nav-none', nav === 'none')
+  watchEffect((onCleanup) => {
+    const className = `tou-preset-${config.value.preset}`
+    document.documentElement.classList.add(className)
+    onCleanup(() => document.documentElement.classList.remove(className))
+  })
 
-    const preset = config.value.preset
-    document.documentElement.classList.toggle('tou-preset-dewdrop', preset !== 'university')
-    document.documentElement.classList.toggle('tou-preset-university', preset === 'university')
+  watchEffect((onCleanup) => {
+    const className = `tou-nav-${config.value.navigation}`
+    document.documentElement.classList.add(className)
+    onCleanup(() => document.documentElement.classList.remove(className))
   })
 
   return config

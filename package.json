@@ -20,9 +20,9 @@
   "scripts": {
     "dev": "slidev",
     "build": "slidev build",
-    "entry": "slidev ./entry.md",
-    "dewdrop": "slidev ./examples/dewdrop.md",
-    "university": "slidev ./examples/university.md"
+    "dev:entry": "slidev ./entry.md",
+    "dev:dewdrop": "slidev ./examples/dewdrop.md",
+    "dev:university": "slidev ./examples/university.md"
   },
   "slidev": {
     "colorSchema": "light",
