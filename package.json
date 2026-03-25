@@ -22,7 +22,8 @@
     "build": "slidev build",
     "dev:entry": "slidev ./entry.md",
     "dev:dewdrop": "slidev ./examples/dewdrop.md",
-    "dev:university": "slidev ./examples/university.md"
+    "dev:university": "slidev ./examples/university.md",
+    "dev:simple": "slidev ./examples/simple.md"
   },
   "slidev": {
     "colorSchema": "light",

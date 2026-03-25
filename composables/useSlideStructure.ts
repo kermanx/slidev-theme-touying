@@ -45,10 +45,7 @@ export function buildSectionStructure(slides: SlideRoute[]): SlideSection[] {
     if (layout === 'section') {
       currentSection = {
         no: slide.no,
-        title:
-          slide.meta.slide?.frontmatter?.title
-          ?? slide.meta.slide?.title
-          ?? `Section ${sections.length + 1}`,
+        title: slide.meta.slide.title ?? `Section ${sections.length + 1}`,
         slides: [],
         subsections: [],
       }
@@ -60,8 +57,8 @@ export function buildSectionStructure(slides: SlideRoute[]): SlideSection[] {
     }
     else if (currentSection) {
       currentSection.slides.push(slide.no)
-      const title = slide.meta.slide?.frontmatter?.title ?? slide.meta.slide?.title
-      const level = slide.meta.slide?.level || NaN
+      const title = slide.meta.slide.title
+      const level = slide.meta.slide.level || NaN
 
       if (title && level <= 2) {
         // This slide starts a new subsection
@@ -112,9 +109,18 @@ export const useSlideStructure = createSharedComposable(() => {
     getSectionIndex(currentPage.value),
   )
 
+  const currentSectionTitle = computed(() => {
+    if (currentPage.value < sections.value[0]?.no) {
+      return slides.value[0].meta.slide.title
+    } else {
+      return sections.value[currentSectionIndex.value]?.title ?? ''
+    }
+  })
+
   return {
     sections,
     currentSectionIndex,
+    currentSectionTitle,
     getSectionIndex,
   }
 })

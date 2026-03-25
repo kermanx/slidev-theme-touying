@@ -4,12 +4,13 @@ A [Slidev](https://sli.dev/) theme ported from [typst-touying](https://github.co
 
 ## Presets
 
-Currently, 2 out of [7 Touying themes](https://touying-typ.github.io/themes) (aka. presets) are available:
+Currently, 3 out of [7 Touying themes](https://touying-typ.github.io/themes) (aka. presets) are available:
 
 | Preset | Preview |
 |--------|---------|
 | `dewdrop` | [Live demo](https://kermanx.com/slidev-theme-touying/dewdrop/) |
 | `university` | [Live demo](https://kermanx.com/slidev-theme-touying/university/) |
+| `simple` | [Live demo](https://kermanx.com/slidev-theme-touying/simple/) |
 
 ## Installation
 
@@ -100,6 +101,17 @@ The University preset features a header bar with a section/slide title, a tri-co
 touying:
   preset: university
 logo: 🏫   # emoji or image path shown in the header
+```
+
+### Simple-specific
+
+A minimal theme: small section-title header + page counter footer. Based on the Polylux simple theme.
+
+```yaml
+touying:
+  preset: simple
+  footer: 'Author · Conference'
+logo: 🔬   # header right (optional)
 ```
 
 ## License
