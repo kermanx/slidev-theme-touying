@@ -33,13 +33,9 @@ layout: section
 touying:
   preset: simple
   footer: 'Author · Conference'   # left footer text
-logo: 🔬                           # header right (optional)
-```
 
-Override the default primary color (`#007a7a`) via CSS variable:
-
-```css
-:root { --slidev-theme-primary: #3b82f6; }
+themeConfig:
+  primary: '#3b82f6' # Overrides the default primary color
 ```
 
 ---

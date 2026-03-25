@@ -6,7 +6,9 @@
     "slidev-theme",
     "slidev",
     "touying",
-    "dewdrop"
+    "dewdrop",
+    "university",
+    "simple"
   ],
   "homepage": "https://github.com/kermanx/slidev-theme-touying#readme",
   "repository": {
@@ -39,7 +41,7 @@
     }
   },
   "files": [
-    "components",
+    "composables",
     "layouts",
     "setup",
     "styles",

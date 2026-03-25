@@ -6,11 +6,11 @@ A [Slidev](https://sli.dev/) theme ported from [typst-touying](https://github.co
 
 Currently, 3 out of [7 Touying themes](https://touying-typ.github.io/themes) (aka. presets) are available:
 
-| Preset | Preview |
+| Preset | Demo |
 |--------|---------|
-| `dewdrop` | [Live demo](https://kermanx.com/slidev-theme-touying/dewdrop/) |
-| `university` | [Live demo](https://kermanx.com/slidev-theme-touying/university/) |
-| `simple` | [Live demo](https://kermanx.com/slidev-theme-touying/simple/) |
+| `dewdrop` | [dewdrop.md](./examples/dewdrop.md) ([Preview](https://kermanx.com/slidev-theme-touying/dewdrop/)) |
+| `university` | [university.md](./examples/university.md) ([Preview](https://kermanx.com/slidev-theme-touying/university/)) |
+| `simple` | [simple.md](./examples/simple.md) ([Preview](https://kermanx.com/slidev-theme-touying/simple/)) |
 
 ## Installation
 
@@ -23,18 +23,8 @@ Then, set the theme in the headmatter:
 ```yaml
 ---
 theme: touying
----
-```
-
-## Basic Usage
-
-Set the preset in the headmatter:
-
-```yaml
----
-theme: touying
 touying:
-  preset: dewdrop   # or: university
+  preset: dewdrop   # or: university, simple
 ---
 ```
 
@@ -45,7 +35,7 @@ touying:
 | `default` | Normal content slide |
 | `cover` | Title / cover slide |
 | `section` | Section divider |
-| `outline` | Auto-generated outline |
+| `outline` | Auto-generated outline (dewdrop only) |
 | `focus` | Full-screen emphasis slide |
 
 ## Configuration
@@ -56,15 +46,8 @@ All options go under the `touying:` key in the **root** frontmatter.
 
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
-| `preset` | `'dewdrop' \| 'university'` | `'dewdrop'` | Theme preset |
-| `navigation` | `'mini-slides' \| 'sidebar' \| 'none'` | `'mini-slides'` | Slide navigation style |
-| `footer` | `string` | `''` | Footer left text |
-| `footerRight` | `string` | `''` | Footer right text |
-| `outlineRowsPerCol` | `number` | `12` | Max rows per column in the outline |
-| `alpha` | `number` | `0.3` | Opacity of inactive sections in navigation |
-| `miniSlides.height` | `string` | `'2em'` | Height of the mini-slides bar |
-| `miniSlides.linebreaks` | `true \| false \| 'auto'` | `'auto'` | Dot grouping in mini-slides mode (see below) |
-| `sidebar.width` | `string` | `'10em'` | Width of the sidebar (also used as symmetric horizontal margin) |
+| `preset` | `'dewdrop' \| 'university' \| 'simple'` | `'dewdrop'` | Theme preset |
+| `footer` | `string` | `''` | Footer left text (dewdrop & simple) |
 
 ### Dewdrop-specific
 
@@ -85,6 +68,16 @@ touying:
     width: '10em'
 ```
 
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `navigation` | `'mini-slides' \| 'sidebar' \| 'none'` | `'mini-slides'` | Slide navigation style |
+| `footerRight` | `string` | `''` | Footer right text |
+| `outlineRowsPerCol` | `number` | `12` | Max rows per column in the outline |
+| `alpha` | `number` | `0.3` | Opacity of inactive sections in navigation |
+| `miniSlides.height` | `string` | `'2em'` | Height of the mini-slides bar |
+| `miniSlides.linebreaks` | `true \| false \| 'auto'` | `'auto'` | Dot grouping in mini-slides mode |
+| `sidebar.width` | `string` | `'10em'` | Sidebar width (also symmetric horizontal margin) |
+
 `miniSlides.linebreaks` controls dot grouping in mini-slides mode:
 
 | Value | Behaviour |
@@ -100,7 +93,7 @@ The University preset features a header bar with a section/slide title, a tri-co
 ```yaml
 touying:
   preset: university
-logo: 🏫   # emoji or image path shown in the header
+logo: /logo.svg
 ```
 
 ### Simple-specific
@@ -111,7 +104,7 @@ A minimal theme: small section-title header + page counter footer. Based on the 
 touying:
   preset: simple
   footer: 'Author · Conference'
-logo: 🔬   # header right (optional)
+logo: /logo.svg
 ```
 
 ## License
