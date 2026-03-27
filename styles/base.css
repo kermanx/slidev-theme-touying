@@ -22,6 +22,11 @@
 .tou-layer {
   position: fixed;
   inset: 0;
+  pointer-events: none;
+
+  & > * {
+    pointer-events: auto;
+  }
 }
 
 .slidev-code {
