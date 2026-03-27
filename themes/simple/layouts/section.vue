@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { useSlideContext } from '@slidev/client'
-import { useSlideStructure } from '../../../composables/useSlideStructure'
 
-const { sections } = useSlideStructure()
 const { $route } = useSlideContext()
 </script>
 
@@ -19,7 +17,6 @@ const { $route } = useSlideContext()
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--slidev-theme-neutralLightest);
   padding: 2em;
   box-sizing: border-box;
 

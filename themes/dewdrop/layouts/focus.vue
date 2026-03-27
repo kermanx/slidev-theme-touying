@@ -5,9 +5,6 @@
  * Full primary-color background, centered white text in 1.5em.
  * No navigation, no footer. Slide counter still increments.
  */
-import { useTouyingConfig } from '../../../composables/useTouyingConfig'
-
-useTouyingConfig()
 </script>
 
 <template>

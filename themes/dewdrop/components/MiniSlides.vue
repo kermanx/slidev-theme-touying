@@ -99,7 +99,7 @@ const showDots = computed(() => config.value.miniSlides.subsection)
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  padding: 0.6em calc(2em / 0.7) 0;
+  padding: 0.6em calc(2.4em / 0.7) 0;
   gap: 0;
   font-size: 0.7em;
   box-sizing: border-box;

@@ -10,7 +10,6 @@ import { computed } from 'vue'
 const { slides } = useNav()
 const { $page } = useSlideContext()
 
-
 const pct = computed(() => {
   const total = slides.value?.length ?? 1
   return Math.min(($page.value / total) * 100, 100)

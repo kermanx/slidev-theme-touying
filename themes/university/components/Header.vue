@@ -47,8 +47,6 @@ const logo = computed(() => slides.value[0].meta.slide.frontmatter.logo ?? '')
   right: 0;
   display: flex;
   flex-direction: column;
-  z-index: 10;
-  background: var(--slidev-theme-neutralLightest);
 
   .uni-header-row {
     display: flex;

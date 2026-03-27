@@ -2,4 +2,13 @@
   --slidev-theme-primary: #04364A;
   --slidev-theme-secondary: #176B87;
   --slidev-theme-tertiary: #448C95;
+
+  .slidev-layout {
+    /* top padding: progress bar (2px) + header row (~2.2em) */
+    padding: 3.6em 2em 3em;
+
+    :where(&) h1 {
+      display: none;
+    }
+  }
 }

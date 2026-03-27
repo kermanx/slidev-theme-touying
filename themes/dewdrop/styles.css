@@ -2,4 +2,18 @@
   --slidev-theme-primary: #0c4842;
   --slidev-theme-secondary: #176B87;
   --slidev-theme-tertiary: #448C95;
+
+  &.tou-nav-sidebar {
+    --tou-default-content-padding: 1.2em var(--tou-sidebar-width) 2em var(--tou-sidebar-width);
+  }
+  &.tou-nav-mini-slides {
+    --tou-default-content-padding: calc(var(--tou-mini-slides-height) + 1em) 2.4em 2.5em 2.4em;
+  }
+  &.tou-nav-none {
+    --tou-default-content-padding: 2em 2.4em 2.5em 2.4em;
+  }
+
+  .slidev-layout {
+    padding: var(--tou-default-content-padding);
+  }
 }

@@ -13,7 +13,6 @@
  * matches the current slide (this slide).
  */
 import { useSlideContext } from '@slidev/client';
-import Footer from '../components/Footer.vue';
 import ProgressiveOutline from '../components/ProgressiveOutline.vue';
 
 const { $page } = useSlideContext()
@@ -31,15 +30,11 @@ const props = withDefaults(defineProps<{
     <div style="width:100%; height:100%; padding-bottom:2.5em; box-sizing:border-box;">
       <ProgressiveOutline :active-section-no="$page" :depth="props.depth" />
     </div>
-
-    <!-- Footer -->
-    <Footer />
   </div>
 </template>
 
 <style>
 .tou-preset-dewdrop .slidev-layout.section {
-  background: var(--slidev-theme-neutralLightest);
   display: flex;
   align-items: stretch;
   padding: 0;

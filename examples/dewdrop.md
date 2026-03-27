@@ -4,6 +4,7 @@ title: slidev-theme-touying
 subtitle: Dewdrop
 author: Kerman
 routerMode: hash
+transition: slide-left
 
 touying:
   preset: dewdrop
@@ -179,22 +180,20 @@ Click to reveal:
 </v-click>
 
 ---
+layout: two-cols
+---
 
 # Two-Column Layout
 
-<div class="grid grid-cols-2 gap-8">
-<div>
-
 **Left column**
 
-Use a CSS grid for two-column layouts. Works well for code + explanation, or comparing two approaches.
+The default `two-cols` layout also works.
 
 - Item A
 - Item B
 - Item C
 
-</div>
-<div>
+::right::
 
 **Right column**
 
@@ -207,8 +206,6 @@ def fib(n: int) -> int:
 print(fib(10))  # 55
 ```
 
-</div>
-</div>
 
 ---
 layout: focus

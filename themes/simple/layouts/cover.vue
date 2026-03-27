@@ -39,7 +39,6 @@ const authors = computed<string[]>(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--slidev-theme-neutralLightest);
   padding: 2em;
   box-sizing: border-box;
 

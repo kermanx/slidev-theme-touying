@@ -8,7 +8,7 @@
 /* ============================================================
    Global slide typography
    ============================================================ */
-.slidev-layout {
+.slidev-layout, .tou-layer {
   --slidev-code-font-size: 0.8em;
   --slidev-code-line-height: 1.6;
   --slidev-code-padding: 0.2em 0.4em;
@@ -16,8 +16,12 @@
   font-weight: 400;
   line-height: 1.5;
   color: var(--slidev-theme-neutralDarkest);
-  background-color: var(--slidev-theme-neutralLightest);
   --uno: font-serif;
+}
+
+.tou-layer {
+  position: fixed;
+  inset: 0;
 }
 
 .slidev-code {

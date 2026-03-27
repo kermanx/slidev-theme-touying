@@ -164,22 +164,20 @@ Click to reveal:
 </v-click>
 
 ---
+layout: two-cols
+---
 
 # Two-Column Layout
 
-<div class="grid grid-cols-2 gap-8">
-<div>
-
 **Left column**
 
-Use a CSS grid for side-by-side content. Works well for comparisons or code + explanation.
+The default `two-cols` layout also works.
 
 - Item A
 - Item B
 - Item C
 
-</div>
-<div>
+::right::
 
 **Right column**
 
@@ -191,9 +189,6 @@ def fib(n: int) -> int:
 
 print(fib(10))  # 55
 ```
-
-</div>
-</div>
 
 ---
 layout: focus

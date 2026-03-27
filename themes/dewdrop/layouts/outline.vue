@@ -8,7 +8,6 @@
  * Pass `highlight` prop to optionally highlight a specific section.
  */
 import ProgressiveOutline from '../components/ProgressiveOutline.vue'
-import Footer from '../components/Footer.vue'
 
 withDefaults(defineProps<{
   /** If set, this section slide number is highlighted. Otherwise all are shown equally. */
@@ -28,14 +27,11 @@ withDefaults(defineProps<{
         :depth="depth"
       />
     </div>
-
-    <Footer />
   </div>
 </template>
 
 <style>
 .tou-preset-dewdrop .slidev-layout.outline {
-  background: var(--slidev-theme-neutralLightest);
   display: flex;
   align-items: stretch;
   padding: 0;

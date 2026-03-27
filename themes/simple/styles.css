@@ -1,36 +1,40 @@
 :root.tou-preset-simple {
   --slidev-theme-primary: #3f6d7f; /* aqua.darken(50%) in Typst */
   --spl-deco: #aaaaaa;
-}
 
-.tou-preset-simple .slidev-layout {
-  font-size: 25px;
-
-  h1, h2, h3, h4, h5, h6 {
-    color: var(--slidev-theme-neutralDarkest);
+  .slidev-layout {
+    padding: 48px 64px;
   }
 
-  strong, b {
-    color: var(--slidev-theme-neutralDarkest);
-  }
+  .slidev-layout, .tou-layer {
+    font-size: 25px;
 
-  /* h2 is the slide title (subslide-preamble in typst): 1.2em bold */
-  h2 {
-    font-size: 1.2em;
-    font-weight: 600;
-    margin-bottom: 1.2em;
-  }
+    h1, h2, h3, h4, h5, h6 {
+      color: var(--slidev-theme-neutralDarkest);
+    }
 
-  /* h1 is the section heading: slightly larger */
-  h1 {
-    font-size: 1.4em;
-  }
+    strong, b {
+      color: var(--slidev-theme-neutralDarkest);
+    }
 
-  a {
-    color: var(--slidev-theme-primary);
-  }
+    /* h2 is the slide title (subslide-preamble in typst): 1.2em bold */
+    h2 {
+      font-size: 1.2em;
+      font-weight: 600;
+      margin-bottom: 1.2em;
+    }
 
-  blockquote {
-    border-left-color: var(--slidev-theme-primary);
+    /* h1 is the section heading: slightly larger */
+    h1 {
+      font-size: 1.4em;
+    }
+
+    a {
+      color: var(--slidev-theme-primary);
+    }
+
+    blockquote {
+      border-left-color: var(--slidev-theme-primary);
+    }
   }
 }

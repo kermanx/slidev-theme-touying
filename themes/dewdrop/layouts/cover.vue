@@ -51,7 +51,6 @@ const { $slidev, $frontmatter } = useSlideContext()
   width: 100%;
   height: 100%;
   padding: 0;
-  background: var(--slidev-theme-neutralLightest);
 
   .cover-inner {
     width: 100%;
