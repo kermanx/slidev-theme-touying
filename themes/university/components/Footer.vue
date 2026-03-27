@@ -7,11 +7,13 @@
  *
  * Columns default to 25% / 1fr / 25%.
  */
-import { computed } from 'vue'
 import { useNav, useSlideContext } from '@slidev/client'
+import { computed } from 'vue'
+import { useNavigationCurrent } from '../../../composables/useNavigationTransition'
 
 const { slides } = useNav()
-const { $page, $nav } = useSlideContext()
+const { $nav } = useSlideContext()
+const page = useNavigationCurrent()
 
 const frontmatter = computed(() => $nav.value.currentSlideRoute.meta.slide.frontmatter)
 const first = computed(() => slides.value[0].meta.slide.frontmatter ?? {})
@@ -27,7 +29,7 @@ const total = computed(() => slides.value?.length ?? 1)
     <div class="uni-footer-b">{{ title }}</div>
     <div class="uni-footer-c">
       <template v-if="frontmatter.footer?.[2]">{{ frontmatter.footer[2] }}</template>
-      <template v-else><span v-if="date">{{ date }} · </span>{{ $page }} / {{ total }}</template>
+      <template v-else><span v-if="date">{{ date }} · </span>{{ page }} / {{ total }}</template>
     </div>
   </footer>
 </template>

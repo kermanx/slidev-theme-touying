@@ -12,6 +12,7 @@ import { computed } from 'vue'
 import { useNav, useSlideContext } from '@slidev/client'
 import type { SlideRoute } from '@slidev/types'
 import { createSharedComposable } from '@vueuse/core'
+import { useNavigationCurrent } from './useNavigationTransition'
 
 export interface SlideSubsection {
   no: number
@@ -97,19 +98,19 @@ export const useSlideStructure = createSharedComposable(() => {
 })
 
 export function useCurrentSectionIndex() {
-  const { $page } = useSlideContext()
+  const page = useNavigationCurrent()
   const { sections } = useSlideStructure()
   return computed(() => sections.value.findIndex(
-    sec => sec.no === $page.value || sec.slides.includes($page.value),
+    sec => sec.no === page.value || sec.slides.includes(page.value),
   ))
 }
 
 export function useCurrentSectionSlideNo() {
-  const { $page } = useSlideContext()
+  const page = useNavigationCurrent()
   const { sections } = useSlideStructure()
   const sectionIndex = useCurrentSectionIndex()
   return computed(() => {
-    if ($page.value < sections.value[0]?.no) {
+    if (page.value < sections.value[0]?.no) {
       return 1
     } else {
       return sections.value[sectionIndex.value]?.no

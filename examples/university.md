@@ -5,6 +5,7 @@ subtitle: University
 author: Author A and Author B
 logo: https://sli.dev/logo.svg
 routerMode: hash
+transition: slide-left
 
 touying:
   preset: university

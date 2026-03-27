@@ -3,6 +3,7 @@ theme: ../
 routerMode: hash
 authors: Alpha and Bravo and Charlie
 date: July 23
+transition: slide-left
 
 touying:
   preset: simple

@@ -6,12 +6,13 @@
  * Current section title is highlighted in primary color; all others are faded.
  * Clicking a section/slide navigates to it.
  */
-import { useNav, useSlideContext } from '@slidev/client'
 import TitleRenderer from '#slidev/title-renderer'
+import { useNav } from '@slidev/client'
+import { useNavigationCurrent } from '../../../composables/useNavigationTransition'
 import { useCurrentSectionIndex, useSlideStructure } from '../../../composables/useSlideStructure'
 
 const { go } = useNav()
-const { $page } = useSlideContext()
+const page = useNavigationCurrent()
 const { sections } = useSlideStructure()
 const currentSectionIndex = useCurrentSectionIndex()
 </script>
@@ -38,7 +39,7 @@ const currentSectionIndex = useCurrentSectionIndex()
           v-for="slideNo in section.slides"
           :key="slideNo"
           class="dew-sidebar-subsection"
-          :class="slideNo === $page ? 'active' : 'inactive'"
+          :class="slideNo === page ? 'active' : 'inactive'"
           @click="go(slideNo)"
         >
           <TitleRenderer class="tou-title" :no="slideNo" />

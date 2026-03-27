@@ -12,14 +12,15 @@
  *   false — always one row for all slides
  *   auto  — one row per subsection only if max subsections across all sections <= 3
  */
-import { useNav, useSlideContext } from '@slidev/client'
+import TitleRenderer from '#slidev/title-renderer'
+import { useNav } from '@slidev/client'
 import { computed } from 'vue'
+import { useNavigationCurrent } from '../../../composables/useNavigationTransition'
 import { useCurrentSectionIndex, useSlideStructure } from '../../../composables/useSlideStructure'
 import { useTouyingConfig } from '../../../composables/useTouyingConfig'
-import TitleRenderer from '#slidev/title-renderer'
 
 const { go } = useNav()
-const { $page } = useSlideContext()
+const page = useNavigationCurrent()
 const { sections } = useSlideStructure()
 const currentSectionIndex = useCurrentSectionIndex()
 const config = useTouyingConfig()
@@ -60,7 +61,7 @@ const showDots = computed(() => config.value.miniSlides.subsection)
             <span
               v-if="sub.no !== section.no"
               class="dew-mini-dot"
-              :class="{ filled: sub.no === $page }"
+              :class="{ filled: sub.no === page }"
               :title="`Slide ${sub.no}`"
               @click="go(sub.no)"
             />
@@ -68,7 +69,7 @@ const showDots = computed(() => config.value.miniSlides.subsection)
               v-for="slideNo in sub.slides"
               :key="slideNo"
               class="dew-mini-dot"
-              :class="{ filled: slideNo === $page }"
+              :class="{ filled: slideNo === page }"
               :title="`Slide ${slideNo}`"
               @click="go(slideNo)"
             />
@@ -80,7 +81,7 @@ const showDots = computed(() => config.value.miniSlides.subsection)
             v-for="slideNo in section.slides"
             :key="slideNo"
             class="dew-mini-dot"
-            :class="{ filled: slideNo === $page }"
+            :class="{ filled: slideNo === page }"
             :title="`Slide ${slideNo}`"
             @click="go(slideNo)"
           />

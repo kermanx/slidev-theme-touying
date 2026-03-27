@@ -9,14 +9,15 @@
  * Left:  current slide title (bold, primary, 1.2em)
  * Right: current section title (primary.lighten ~65%) + logo
  */
-import { useNav, useSlideContext } from '@slidev/client'
 import TitleRenderer from '#slidev/title-renderer'
+import { useNav } from '@slidev/client'
 import { computed } from 'vue'
+import { useNavigationCurrent } from '../../../composables/useNavigationTransition'
 import { useCurrentSectionSlideNo } from '../../../composables/useSlideStructure'
 import ProgressBar from './ProgressBar.vue'
 
 const { slides } = useNav()
-const { $page } = useSlideContext()
+const page = useNavigationCurrent()
 const currentSectionSlideNo = useCurrentSectionSlideNo()
 
 const logo = computed(() => slides.value[0].meta.slide.frontmatter.logo ?? '')
@@ -27,7 +28,7 @@ const logo = computed(() => slides.value[0].meta.slide.frontmatter.logo ?? '')
     <ProgressBar />
     <div class="uni-header-row">
       <span class="uni-header-left">
-        <TitleRenderer class="tou-title" :no="$page" />
+        <TitleRenderer class="tou-title" :no="page" />
       </span>
       <span class="uni-header-right">
         <span class="uni-header-section">
