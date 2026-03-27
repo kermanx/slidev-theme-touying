@@ -7,15 +7,17 @@
  * - Right: page counter (or custom text) via touying.footerRight
  */
 import { useNav } from '@slidev/client'
+import { useSlideContext } from '@slidev/client'
 import { useTouyingConfig } from '../../../composables/useTouyingConfig'
 
 const config = useTouyingConfig()
 const { total } = useNav()
+const { $frontmatter } = useSlideContext()
 </script>
 
 <template>
   <footer class="dew-footer">
-    <span class="dew-footer-left">{{ config.footer }}</span>
+    <span class="dew-footer-left">{{ $frontmatter.footer || config.footer }}</span>
     <span class="dew-footer-right">
       <template v-if="config.footerRight">{{ config.footerRight }}</template>
       <template v-else>{{ $page }} / {{ total }}</template>

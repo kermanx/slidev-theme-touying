@@ -11,12 +11,12 @@ import { computed } from 'vue'
 import { useNav, useSlideContext } from '@slidev/client'
 
 const { slides } = useNav()
-const { $page } = useSlideContext()
+const { $page, $frontmatter } = useSlideContext()
 
 const first = computed(() => slides.value[0].meta.slide.frontmatter ?? {})
-const author = computed(() => first.value.author ?? '')
-const title = computed(() => first.value.title ?? '')
-const date = computed(() => first.value.date ?? '')
+const author = computed(() => $frontmatter.footer?.[0] || first.value.author || '')
+const title = computed(() => $frontmatter.footer?.[1] || first.value.title || '')
+const date = computed(() => first.value.date || '')
 const total = computed(() => slides.value?.length ?? 1)
 </script>
 
@@ -25,7 +25,8 @@ const total = computed(() => slides.value?.length ?? 1)
     <div class="uni-footer-a">{{ author }}</div>
     <div class="uni-footer-b">{{ title }}</div>
     <div class="uni-footer-c">
-      <span v-if="date">{{ date }} · </span>{{ $page }} / {{ total }}
+      <template v-if="$frontmatter.footer?.[2]">{{ $frontmatter.footer[2] }}</template>
+      <template v-else><span v-if="date">{{ date }} · </span>{{ $page }} / {{ total }}</template>
     </div>
   </footer>
 </template>

@@ -9,7 +9,7 @@ import { computed } from 'vue'
 const config = useTouyingConfig()
 
 const { $nav, $frontmatter } = useSlideContext()
-const hideNav = computed(() => $frontmatter.navigation === 'none' || ['cover', 'focus', 'outline', 'section'].includes($nav.value.currentLayout))
+const hideNav = computed(() => $frontmatter.navigation === false || ['cover', 'focus', 'outline', 'section'].includes($nav.value.currentLayout))
 const hideFooter = computed(() => $frontmatter.footer === false || ['cover', 'focus'].includes($nav.value.currentLayout))
 </script>
 

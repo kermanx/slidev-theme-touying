@@ -5,7 +5,7 @@ import Footer from './components/Footer.vue'
 import { computed } from 'vue'
 
 const { $nav, $frontmatter } = useSlideContext()
-const hideHeader = computed(() => $frontmatter.header === 'none' || ['cover', 'focus', 'section'].includes($nav.value.currentLayout))
+const hideHeader = computed(() => $frontmatter.header === false || ['cover', 'focus', 'section'].includes($nav.value.currentLayout))
 const hideFooter = computed(() => $frontmatter.footer === false || ['cover', 'focus'].includes($nav.value.currentLayout))
 </script>
 

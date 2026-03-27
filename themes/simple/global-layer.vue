@@ -11,8 +11,8 @@ const { $page } = useSlideContext()
 const currentSectionSlideNo = useCurrentSectionSlideNo()
 
 const total = computed(() => $nav.value?.slides.length ?? 1)
-const hideHeader = computed(() => ['none', false].includes($frontmatter.header) || ['cover', 'focus', 'section'].includes($nav.value.currentLayout))
-const hideFooter = computed(() => ['none', false].includes($frontmatter.footer) || ['cover', 'focus', 'section'].includes($nav.value.currentLayout))
+const hideHeader = computed(() => $frontmatter.header === false || ['cover', 'focus', 'section'].includes($nav.value.currentLayout))
+const hideFooter = computed(() => $frontmatter.footer === false || ['cover', 'focus', 'section'].includes($nav.value.currentLayout))
 </script>
 
 <template>
@@ -26,7 +26,7 @@ const hideFooter = computed(() => ['none', false].includes($frontmatter.footer) 
     </Transition>
     <Transition name="fade" v-show="!hideFooter">
       <footer class="spl-footer">
-        <span class="spl-footer-left">{{ config.footer }}</span>
+        <span class="spl-footer-left">{{ $frontmatter.footer || config.footer }}</span>
         <span class="spl-footer-right">{{ $page }} / {{ total }}</span>
       </footer>
     </Transition>
