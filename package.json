@@ -1,6 +1,6 @@
 {
   "name": "slidev-theme-touying",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "A Slidev theme inspired by typst-touying",
   "keywords": [
     "slidev-theme",
@@ -50,7 +50,8 @@
     "README.md",
     "LICENSE",
     "slides.md",
-    "uno.config.ts"
+    "uno.config.ts",
+    "global-top.vue"
   ],
   "devDependencies": {
     "@slidev/cli": "^52.14.1",
