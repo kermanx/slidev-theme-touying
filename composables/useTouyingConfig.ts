@@ -17,6 +17,8 @@ export interface TouyingConfig {
     height: string,
     /** true: always one row per subsection; false: all dots in one row; auto (default): one row per subsection only if max subsections per section <= 3 */
     linebreaks: true | false | 'auto'
+    /** Whether to show slide dots at all (default: true) */
+    subsection: boolean
   },
   sidebar: {
     width: string
@@ -35,6 +37,7 @@ const DEFAULTS: TouyingConfig = {
   miniSlides: {
     height: '2em',
     linebreaks: 'auto',
+    subsection: true,
   },
   sidebar: {
     width: '10em',

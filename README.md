@@ -64,6 +64,7 @@ touying:
   miniSlides:
     height: '2em'
     linebreaks: auto        # true | false | auto
+    subsection: true        # show subsection dots
   sidebar:
     width: '10em'
 ```
@@ -75,7 +76,7 @@ touying:
 | `outlineRowsPerCol` | `number` | `12` | Max rows per column in the outline |
 | `alpha` | `number` | `0.3` | Opacity of inactive sections in navigation |
 | `miniSlides.height` | `string` | `'2em'` | Height of the mini-slides bar |
-| `miniSlides.linebreaks` | `true \| false \| 'auto'` | `'auto'` | Dot grouping in mini-slides mode |
+| `miniSlides.subsection` | `boolean` | `true` | Show slide dots below section titles |
 | `sidebar.width` | `string` | `'10em'` | Sidebar width (also symmetric horizontal margin) |
 
 `miniSlides.linebreaks` controls dot grouping in mini-slides mode:

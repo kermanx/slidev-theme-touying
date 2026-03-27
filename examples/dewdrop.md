@@ -53,6 +53,7 @@ touying:
   miniSlides:
     height: '2em'
     linebreaks: auto        # true | false | auto
+    subsection: true        # show subsection dots
   sidebar:
     width: '10em'
 ```

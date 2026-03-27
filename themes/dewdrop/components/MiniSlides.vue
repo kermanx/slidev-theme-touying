@@ -25,12 +25,15 @@ const currentSectionIndex = useCurrentSectionIndex()
 const config = useTouyingConfig()
 
 const useLinebreaks = computed(() => {
+  if (!config.value.miniSlides.subsection) return false
   const setting = config.value.miniSlides.linebreaks ?? 'auto'
   if (setting === 'auto') return sections.value.every(s => s.subsections.length <= 3)
   if (setting === true) return true
   if (setting === false) return false
   console.error(`Invalid miniSlides.linebreaks value: ${setting}`)
 })
+
+const showDots = computed(() => config.value.miniSlides.subsection)
 </script>
 
 <template>
@@ -47,21 +50,34 @@ const useLinebreaks = computed(() => {
       </span>
 
       <!-- One row of dots per subsection (linebreaks) or single row -->
-      <template v-if="useLinebreaks && section.subsections.length">
-        <div
-          v-for="sub in section.subsections"
-          :key="sub.no"
-          class="dew-mini-slides-dots"
-        >
+      <template v-if="showDots">
+        <template v-if="useLinebreaks && section.subsections.length">
+          <div
+            v-for="sub in section.subsections"
+            :key="sub.no"
+            class="dew-mini-slides-dots"
+          >
+            <span
+              v-if="sub.no !== section.no"
+              class="dew-mini-dot"
+              :class="{ filled: sub.no === $page }"
+              :title="`Slide ${sub.no}`"
+              @click="go(sub.no)"
+            />
+            <span
+              v-for="slideNo in sub.slides"
+              :key="slideNo"
+              class="dew-mini-dot"
+              :class="{ filled: slideNo === $page }"
+              :title="`Slide ${slideNo}`"
+              @click="go(slideNo)"
+            />
+          </div>
+        </template>
+        <!-- Single row -->
+        <div v-else class="dew-mini-slides-dots">
           <span
-            v-if="sub.no !== section.no"
-            class="dew-mini-dot"
-            :class="{ filled: sub.no === $page }"
-            :title="`Slide ${sub.no}`"
-            @click="go(sub.no)"
-          />
-          <span
-            v-for="slideNo in sub.slides"
+            v-for="slideNo in section.slides"
             :key="slideNo"
             class="dew-mini-dot"
             :class="{ filled: slideNo === $page }"
@@ -70,17 +86,6 @@ const useLinebreaks = computed(() => {
           />
         </div>
       </template>
-      <!-- Single row -->
-      <div v-else class="dew-mini-slides-dots">
-        <span
-          v-for="slideNo in section.slides"
-          :key="slideNo"
-          class="dew-mini-dot"
-          :class="{ filled: slideNo === $page }"
-          :title="`Slide ${slideNo}`"
-          @click="go(slideNo)"
-        />
-      </div>
     </div>
   </nav>
 </template>
