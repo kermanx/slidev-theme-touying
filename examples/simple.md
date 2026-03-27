@@ -49,6 +49,8 @@ themeConfig:
 | `section` | Centered bold section title |
 | `focus` | Full-screen primary-color accent |
 
+Built-in layouts such as `two-cols` also work seamlessly with the theme.
+
 ---
 layout: section
 ---

@@ -1,32 +1,35 @@
 <script setup lang="ts">
-import { useSlideContext } from '@slidev/client'
 import TitleRenderer from '#slidev/title-renderer'
-import { useTouyingConfig } from '../../composables/useTouyingConfig'
+import { useSlideContext } from '@slidev/client'
 import { computed } from 'vue'
+import { useCurrentTransition } from '../../composables/useCurrentTransition'
 import { useCurrentSectionSlideNo } from '../../composables/useSlideStructure'
+import { useTouyingConfig } from '../../composables/useTouyingConfig'
 
 const config = useTouyingConfig()
-const { $nav, $frontmatter } = useSlideContext()
+const { $nav } = useSlideContext()
 const { $page } = useSlideContext()
 const currentSectionSlideNo = useCurrentSectionSlideNo()
 
 const total = computed(() => $nav.value?.slides.length ?? 1)
-const hideHeader = computed(() => $frontmatter.header === false || ['cover', 'focus', 'section'].includes($nav.value.currentLayout))
-const hideFooter = computed(() => $frontmatter.footer === false || ['cover', 'focus', 'section'].includes($nav.value.currentLayout))
+const frontmatter = computed(() => $nav.value.currentSlideRoute.meta.slide.frontmatter)
+const hideHeader = computed(() => frontmatter.value.header === false || ['cover', 'focus', 'section'].includes($nav.value.currentLayout))
+const hideFooter = computed(() => frontmatter.value.footer === false || ['cover', 'focus', 'section'].includes($nav.value.currentLayout))
+const transition = useCurrentTransition()
 </script>
 
 <template>
   <div class="tou-layer">
-    <Transition name="fade" v-show="!hideHeader">
+    <Transition :name="transition" v-show="!hideHeader">
       <header class="spl-header">
         <span class="spl-header-left">
           <TitleRenderer class="tou-title" :no="currentSectionSlideNo" />
         </span>
       </header>
     </Transition>
-    <Transition name="fade" v-show="!hideFooter">
+    <Transition :name="transition" v-show="!hideFooter">
       <footer class="spl-footer">
-        <span class="spl-footer-left">{{ $frontmatter.footer || config.footer }}</span>
+        <span class="spl-footer-left">{{ frontmatter.value.footer || config.footer }}</span>
         <span class="spl-footer-right">{{ $page }} / {{ total }}</span>
       </footer>
     </Transition>

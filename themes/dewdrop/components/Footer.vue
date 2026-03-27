@@ -9,18 +9,20 @@
 import { useNav } from '@slidev/client'
 import { useSlideContext } from '@slidev/client'
 import { useTouyingConfig } from '../../../composables/useTouyingConfig'
+import { computed } from 'vue'
 
 const config = useTouyingConfig()
 const { total } = useNav()
-const { $frontmatter } = useSlideContext()
+const { $nav } = useSlideContext()
+const frontmatter = computed(() => $nav.value.currentSlideRoute.meta.slide.frontmatter)
 </script>
 
 <template>
   <footer class="dew-footer">
-    <span class="dew-footer-left">{{ $frontmatter.footer || config.footer }}</span>
+    <span class="dew-footer-left">{{ frontmatter.footer || config.footer }}</span>
     <span class="dew-footer-right">
       <template v-if="config.footerRight">{{ config.footerRight }}</template>
-      <template v-else>{{ $page }} / {{ total }}</template>
+      <template v-else>{{ $nav.currentPage }} / {{ total }}</template>
     </span>
   </footer>
 </template>

@@ -51,6 +51,8 @@ logo: /logo.svg
 | `section` | Section divider — centered title + progress bar |
 | `focus` | Full-screen primary-color accent slide |
 
+Built-in layouts such as `two-cols` also work seamlessly with the theme.
+
 ---
 
 # Header

@@ -91,6 +91,8 @@ touying:
 | `outline` | Standalone full outline |
 | `focus` | Full-screen accent slide |
 
+Built-in layouts such as `two-cols` also work seamlessly with the theme.
+
 ---
 layout: section
 ---
