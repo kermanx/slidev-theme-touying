@@ -22,27 +22,24 @@ const { sections } = useSlideStructure()
 const currentSectionIndex = useCurrentSectionIndex()
 const touyingConfig = useTouyingConfig()
 
-// Pack sections into columns: fill each column up to outlineRowsPerCol rows before starting the next.
-// A section group occupies 1 row (the section) + its subsection rows (when depth >= 2).
 const columns = computed(() => {
-  type Entry = { section: (typeof sections.value)[number], idx: number }
-  const cols: Entry[][] = []
-  let currentCol: Entry[] = []
-  let currentRows = 0
-  const maxRows = touyingConfig.value.outlineRowsPerCol
+  type Item = { type: 'section' | 'sub', idx: number, subIdx?: number }
+  const items: Item[] = []
 
-  sections.value.forEach((section, idx) => {
-    const rows = 1 + (props.depth >= 2 ? section.subsections.length : 0)
-    if (currentRows + rows > maxRows && currentCol.length > 0) {
-      cols.push(currentCol)
-      currentCol = []
-      currentRows = 0
+  sections.value.forEach((sec, idx) => {
+    items.push({ type: 'section', idx })
+    if (props.depth >= 2) {
+      sec.subsections.forEach((_, subIdx) => {
+        items.push({ type: 'sub', idx, subIdx })
+      })
     }
-    currentCol.push({ section, idx })
-    currentRows += rows
   })
-  if (currentCol.length > 0)
-    cols.push(currentCol)
+
+  const cols: Item[][] = []
+  const maxRows = touyingConfig.value.outlineRowsPerCol
+  for (let i = 0; i < items.length; i += maxRows) {
+    cols.push(items.slice(i, i + maxRows))
+  }
   return cols
 })
 
@@ -79,48 +76,36 @@ function getItemState(idx: number): 'active' | 'past' | 'future' | 'neutral' {
     <div class="dew-outline-label">{{ label }}</div>
 
     <div class="dew-outline-list">
-      <div
-        v-for="(col, colIdx) in columns"
-        :key="colIdx"
-        class="dew-outline-column"
-      >
-        <div
-          v-for="({ section, idx }) in col"
-          :key="section.no"
-          class="dew-outline-section-group"
-        >
-          <!-- Section row -->
+      <div v-for="(col, colIdx) in columns" :key="colIdx" class="dew-outline-column">
+        <template v-for="item in col" :key="`${item.idx}-${item.subIdx ?? 's'}`">
           <div
+            v-if="item.type === 'section'"
             class="dew-outline-item"
-            :class="getItemState(idx)"
-            @click="go(section.no)"
+            :class="getItemState(item.idx)"
+            @click="go(sections[item.idx].no)"
           >
-            <span class="dew-outline-num" :style="{ width: numWidth(colIdx) }">{{ idx + 1 }}.</span>
+            <span class="dew-outline-num" :style="{ width: numWidth(colIdx) }">{{ item.idx + 1 }}.</span>
             <span class="dew-outline-title">
-              <TitleRenderer class="tou-title" :no="section.no" />
+              <TitleRenderer class="tou-title" :no="sections[item.idx].no" />
             </span>
             <span class="dew-outline-fill" aria-hidden="true" />
-            <span class="dew-outline-page">{{ section.no }}</span>
+            <span class="dew-outline-page">{{ sections[item.idx].no }}</span>
           </div>
 
-          <!-- Subsection rows (depth >= 2) -->
-          <template v-if="depth >= 2">
-            <div
-              v-for="(sub, subIdx) in section.subsections"
-              :key="sub.no"
-              class="dew-outline-subitem"
-              :class="[getItemState(idx), sub.no === $page ? 'dew-outline-subitem-current' : '']"
-              @click="go(sub.no)"
-            >
-              <span class="dew-outline-num" :style="{ width: subNumWidth(idx, section.subsections.length) }">{{ idx + 1 }}.{{ subIdx + 1 }}</span>
-              <span class="dew-outline-title">
-                <TitleRenderer class="tou-title" :no="sub.no" />
-              </span>
-              <span class="dew-outline-fill" aria-hidden="true" />
-              <span class="dew-outline-page">{{ sub.no }}</span>
-            </div>
-          </template>
-        </div>
+          <div
+            v-else
+            class="dew-outline-subitem"
+            :class="[getItemState(item.idx), sections[item.idx].subsections[item.subIdx!].no === $page ? 'dew-outline-subitem-current' : '']"
+            @click="go(sections[item.idx].subsections[item.subIdx!].no)"
+          >
+            <span class="dew-outline-num" :style="{ width: subNumWidth(item.idx, sections[item.idx].subsections.length) }">{{ item.idx + 1 }}.{{ item.subIdx! + 1 }}</span>
+            <span class="dew-outline-title">
+              <TitleRenderer class="tou-title" :no="sections[item.idx].subsections[item.subIdx!].no" />
+            </span>
+            <span class="dew-outline-fill" aria-hidden="true" />
+            <span class="dew-outline-page">{{ sections[item.idx].subsections[item.subIdx!].no }}</span>
+          </div>
+        </template>
       </div>
     </div>
   </div>
