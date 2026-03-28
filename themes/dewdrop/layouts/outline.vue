@@ -18,22 +18,19 @@ withDefaults(defineProps<{
 </script>
 
 <template>
-  <div class="slidev-layout outline" style="width:100%; height:100%; position:relative; overflow:hidden;">
-
-    <div style="width:100%; height:100%; padding-bottom:2.5em; box-sizing:border-box;">
-      <ProgressiveOutline
-        :show-all="highlight == null"
-        :active-section-no="highlight"
-        :depth="depth"
-      />
-    </div>
+  <div class="slidev-layout outline">
+    <ProgressiveOutline
+      :show-all="highlight == null"
+      :active-section-no="highlight"
+      :depth="depth"
+    />
   </div>
 </template>
 
 <style>
 .tou-preset-dewdrop .slidev-layout.outline {
-  display: flex;
-  align-items: stretch;
   padding: 0;
+  outline-style: unset;
+  --uno: w-full h-full;
 }
 </style>

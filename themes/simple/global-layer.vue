@@ -8,10 +8,10 @@ import Header from './components/Header.vue'
 const { $nav } = useSlideContext()
 
 const frontmatter = computed(() => $nav.value.currentSlideRoute.meta.slide.frontmatter)
-const hideHeader = computed(() => frontmatter.value.header === false || ['cover', 'focus', 'section'].includes($nav.value.currentLayout))
+const hideHeader = computed(() => frontmatter.value.header === false || ['cover', 'focus', 'section', 'end'].includes($nav.value.currentLayout))
 const HeaderTransition = useNavigationTransition(hideHeader)
 
-const hideFooter = computed(() => frontmatter.value.footer === false || ['cover', 'focus', 'section'].includes($nav.value.currentLayout))
+const hideFooter = computed(() => frontmatter.value.footer === false || ['cover', 'focus', 'section', 'end'].includes($nav.value.currentLayout))
 const FooterTransition = useNavigationTransition(hideFooter)
 </script>
 

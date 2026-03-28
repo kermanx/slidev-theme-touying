@@ -11,9 +11,9 @@ const config = useTouyingConfig()
 
 const { $nav } = useSlideContext()
 const frontmatter = computed(() => $nav.value.currentSlideRoute.meta.slide.frontmatter)
-const hideNav = computed(() => frontmatter.value.navigation === false || ['cover', 'focus', 'outline', 'section'].includes($nav.value.currentLayout))
+const hideNav = computed(() => frontmatter.value.navigation === false || ['cover', 'focus', 'outline', 'section', 'end'].includes($nav.value.currentLayout))
 const NavTransition = useNavigationTransition(hideNav)
-const hideFooter = computed(() => frontmatter.value.footer === false || ['cover', 'focus'].includes($nav.value.currentLayout))
+const hideFooter = computed(() => frontmatter.value.footer === false || ['cover', 'focus', 'end'].includes($nav.value.currentLayout))
 const FooterTransition = useNavigationTransition(hideFooter)
 </script>
 

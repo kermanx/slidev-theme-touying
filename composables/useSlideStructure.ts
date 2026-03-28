@@ -49,8 +49,11 @@ export function buildSectionStructure(slides: SlideRoute[]): SlideSection[] {
       currentSubsection = null
       sections.push(currentSection)
     }
-    else if (layout === 'cover' || layout === 'outline' || layout === 'focus') {
+    else if (layout && ['cover', 'outline', 'focus', 'end'].includes(layout)) {
       // These special slides don't belong to any section
+    }
+    else if (slide.meta.slide.frontmatter.hideInToc) {
+      // Slides with `hideInToc` don't belong to any section
     }
     else if (currentSection) {
       currentSection.slides.push(slide.no)

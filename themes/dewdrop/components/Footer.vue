@@ -19,7 +19,7 @@ const frontmatter = computed(() => $nav.value.currentSlideRoute.meta.slide.front
 
 <template>
   <footer class="dew-footer">
-    <span class="dew-footer-left">{{ frontmatter.footer || config.footer }}</span>
+    <span class="dew-footer-left">{{ frontmatter.footer || config.footer || $nav.slides[0].meta.slide.frontmatter.footer }}</span>
     <span class="dew-footer-right">
       <template v-if="config.footerRight">{{ config.footerRight }}</template>
       <template v-else>{{ $nav.currentPage }} / {{ total }}</template>

@@ -32,7 +32,7 @@ const DEFAULTS: TouyingConfig = {
   navigation: 'mini-slides',
   footer: '',
   footerRight: '',
-  outlineRowsPerCol: 12,
+  outlineRowsPerCol: 14,
   alpha: 0.3,
   miniSlides: {
     height: '2em',

@@ -1,6 +1,7 @@
 {
   "name": "slidev-theme-touying",
-  "version": "0.1.9",
+  "version": "0.1.10",
+  "type": "module",
   "description": "A Slidev theme inspired by typst-touying",
   "keywords": [
     "slidev-theme",
@@ -10,6 +11,11 @@
     "university",
     "simple"
   ],
+  "author": {
+    "name": "_Kerman",
+    "email": "kermanx@qq.com",
+    "url": "https://github.com/kermanx"
+  },
   "homepage": "https://github.com/kermanx/slidev-theme-touying#readme",
   "repository": {
     "type": "git",
